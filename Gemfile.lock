@@ -26,7 +26,9 @@ GEM
     net-http-digest_auth (1.4.1)
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
-    nokogiri (1.13.6-x64-mingw-ucrt)
+    nokogiri (1.13.6-x64-unknown)
+      racc (~> 1.4)
+    nokogiri (1.13.6-x86_64-linux)
       racc (~> 1.4)
     public_suffix (4.0.7)
     racc (1.6.0)
@@ -51,7 +53,8 @@ GEM
     webrobots (0.1.2)
 
 PLATFORMS
-  x64-mingw-ucrt
+  x64-unknown
+  x86_64-linux
 
 DEPENDENCIES
   mechanize (~> 2.8, >= 2.8.4)
