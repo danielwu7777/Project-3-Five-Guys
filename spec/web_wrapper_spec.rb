@@ -19,7 +19,6 @@ describe 'Web_Wrapper' do
 
   # Created 6/10/2022 by Jake McCann
   it 'grabs body(actual html) from mechanize return type' do
-    fake_response = Mechanize.new()
     allow_any_instance_of(Mechanize).to receive(:get).and_return Mechanize.new
     allow_any_instance_of(Mechanize).to receive(:body).and_return "correctly grabbed body"
     sut = Web_Wrapper.new
