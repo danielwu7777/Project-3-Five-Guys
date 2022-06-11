@@ -2,7 +2,6 @@
 
 class Section
   attr_reader :section_num,:term,:mode,:city,:building,:room,:days,:time
-  @@course_title = "N/A"
 
 =begin
 course_title = String - name of course. optional after next instance
