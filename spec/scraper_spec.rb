@@ -4,10 +4,10 @@ require_relative '../lib/scraper'
 
 describe 'Scraper' do
   # Created 6/10/2022 by Jake McCann
-  it 'returns array of all 4 desired content from courses_list.html' do
+  it 'returns array of all 4 desired content from courses_list_simple.html' do
     expected = Array.new 4, "<p>desired_content</p>"
 
-    result = Scraper.scrape_courses(nil, IO.read("#{__dir__}/example_html/courses_list.html"))
+    result = Scraper.scrape_courses(nil, IO.read("#{__dir__}/example_html/courses_list_simple.html"))
 
     expect(result == expected).to be_truthy
   end
