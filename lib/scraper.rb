@@ -20,10 +20,10 @@ class Scraper
   def self.scrape_all_courses(html_to_scrape)
     noko_html = Nokogiri::HTML html_to_scrape
     # grab html segments containing course information
-    init_scrape = noko_html.css('div[id]').select{ |div| div['id'] =~ /accordion-region-id-\d+/}
-    cleaned_scrape = Array.new init_scrape.length, ""
+    scraped_courses = noko_html.css('div[id]').select{ |div| div['id'] =~ /accordion-region-id-\d+/}
+    clean_scraped_courses = Array.new scraped_courses.length, ""
     # grab child course information, removes leading and ending whitespace in html
-    init_scrape.each_with_index {|course_div, idx| course_div.children.each {|child| cleaned_scrape[idx] += child.to_s.gsub /\s*\n\s*/, ''}}
-    cleaned_scrape
+    scraped_courses.each_with_index {|course_div, idx| course_div.children.each {|child| clean_scraped_courses[idx] += child.to_s.gsub /\s*\n\s*/, ''}}
+    clean_scraped_courses
   end
 end

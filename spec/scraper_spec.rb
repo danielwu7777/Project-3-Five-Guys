@@ -13,7 +13,7 @@ describe 'Scraper' do
   end
 
   # Created 6/11/2022 by Jake McCann
-  it 'returns array of all 4 desired content from courses_list_real.html' do
+  it 'returns array with both courses information from courses_list_real.html' do
     expected = Array.new 2
     expected[0] = "<h4 class=\"title\"><span class=\"title\">Introduction to Computing Technology</span> "\
                   "<span class=\"number\">(1110)</span></h4><p class=\"description\"><span class=\"label\">"\
