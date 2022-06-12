@@ -11,6 +11,7 @@ class Scraper
   def self.scrape_courses(filter_as_regex, html_to_scrape)
     #get sections of html_to_scrape that follow filter_as_regex
     scrape_all_courses html_to_scrape
+    #Once filtering is implemented, the array above can be searched through with filter_as_regex
   end
 
   private
@@ -22,7 +23,7 @@ class Scraper
     # grab html segments containing course information
     scraped_courses = noko_html.css('div[id]').select{ |div| div['id'] =~ /accordion-region-id-\d+/}
     clean_scraped_courses = Array.new scraped_courses.length, ""
-    # grab child course information, removes leading and ending whitespace in html
+    # grab child course information, removes whitespace between html tags
     scraped_courses.each_with_index {|course_div, idx| course_div.children.each {|child| clean_scraped_courses[idx] += child.to_s.gsub /\s*\n\s*/, ''}}
     clean_scraped_courses
   end
