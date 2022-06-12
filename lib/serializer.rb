@@ -19,7 +19,7 @@ class Serializer
       num = course_string.match(/(?<=<span class=['|"]number['|"]>\().*?(?=\))/).to_s
       title = course_string.match(/(?<=<span class=['|"]title['|"]>).*?(?=<)/).to_s #or <span class='title'>.*?<\/span>
       desc = course_string.match(/(?<=class=['|"]label['|"]>Description:<\/span> )(.*?)(?=<)/ ).to_s
-      prereqs = course_string.match(/Prereq:.*?(?= <)/ ).to_s
+      prereqs = course_string.match(/(?<=Prereq: ).*?(?= <)/ ).to_s
       hours = course_string.match(/(?<=Units:<\/span> ).*?(?=<)/).to_s
       course_list.unshift Course.new num, title, desc, prereqs, hours
     end
