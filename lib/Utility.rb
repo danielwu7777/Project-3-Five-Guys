@@ -1,9 +1,9 @@
-# File edited 6/11/2022 by Noah Moon
+# File created 6/11/2022 by Noah Moon
+# File edited 6/12/2022 by Noah Moon
 
 class Utility
-
-
-  #Created 6/11/2022 by Noah Moon
+  # Created 6/11/2022 by Noah Moon
+  # Edited 6/12/2022 by Noah Moon
   # Returns a new string which wraps line according to max_line
   def self.wrap_string(string, max_line)
     newString = String.new
@@ -11,14 +11,19 @@ class Utility
     string.each_line do |line|
       if line.length > max_line
         temp_string = String.new
-        while_count = 0
+        new_char_count = 0
+        last_index = 0
+        while temp_string.length - new_char_count < line.length - max_line
+          new_char_count += 1
+          last_space_index = last_index + max_line - 1 # sets default to max length
 
-        while temp_string.length < line.length - max_line + 1
-          while_count += 1
-          temp_string += "#{line[(max_line*(while_count-1))...(max_line*while_count)]}\n"
+          line[last_index...last_index+max_line].each_char.with_index{|char ,index|
+            last_space_index = index + last_index if char == " "} # searches for spaces
+
+          temp_string += "#{line[last_index..last_space_index]}\n" # adds up to space
+          last_index = last_space_index + 1 # starts at index after space
         end
-        temp_string += line[(while_count*max_line)...line.length]
-
+        temp_string += "#{line[last_index...line.length]}" # adds remaining string
         newString += temp_string
       else
         newString += line
@@ -27,3 +32,4 @@ class Utility
     newString
   end
 end
+
