@@ -2,6 +2,7 @@
 # File edited 6/11/2022 by Jake McCann
 require_relative 'course_section_factory'
 require_relative 'utility'
+require_relative 'safe_input'
 
 class User_Input
 
@@ -15,9 +16,7 @@ class User_Input
     # Prompts user and gets input
     def main_menu_io
         main_menu
-        #TODO: input check
-        input = STDIN.gets.chop
-        case input
+        case Safe_Input.menu_choice %w[0 1]
         when "0"
             return
         when "1"
@@ -32,9 +31,7 @@ class User_Input
         @data_factory.courses(nil).each{|course| puts(Utility.wrap_string "\n#{course.to_s}", 90)}
         courses_menu
 
-        #TODO: input check
-        input = STDIN.gets.chomp
-        case input
+        case Safe_Input.menu_choice %w[0 1]
         when "0"
             main_menu_io
         when "1"
