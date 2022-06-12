@@ -30,14 +30,25 @@ describe 'User_Input' do
   end
 
   #Created 6/11/2022 by Jake McCann
-  it 'triggers main menu when entering 0 in courses menu' do
+  it 'prints one fetched course when entering courses menu' do
     allow(STDIN).to receive(:gets).and_return "0\n"
-    allow_any_instance_of(User_Input).to receive(:main_menu_io) do
-      puts "correct"
-    end
+    fake_course = Course.new nil, nil, nil, nil, nil
+    allow_any_instance_of(Course_Section_Factory).to receive(:courses).and_return Array.new(1, fake_course)
+    allow_any_instance_of(Course).to receive(:to_s).and_return "am course"
     sut = User_Input.new
 
-    expect{sut.courses_io}.to output(/correct/).to_stdout
+    expect{sut.courses_io}.to output(/am course\n/).to_stdout
+  end
+
+  #Created 6/11/2022 by Jake McCann
+  it 'prints two fetched courses when entering courses menu' do
+    allow(STDIN).to receive(:gets).and_return "0\n", "0\n"
+    fake_course = Course.new nil, nil, nil, nil, nil
+    allow_any_instance_of(Course_Section_Factory).to receive(:courses).and_return Array.new(2, fake_course)
+    allow_any_instance_of(Course).to receive(:to_s).and_return "am course"
+    sut = User_Input.new
+
+    expect{sut.courses_io}.to output(/am course\n\s*am course\n/).to_stdout
   end
 
 end
