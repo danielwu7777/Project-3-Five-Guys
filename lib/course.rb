@@ -14,4 +14,5 @@ description = String - description of course
     @course_title = course_title
     @description = description
   end
+
 end
