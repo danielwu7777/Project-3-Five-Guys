@@ -12,12 +12,12 @@ class User_Input
 
     # Created 6/11/2022 by Jake McCann
     # Prompts user and gets input
-    def prompt_and_input
+    def courses_io
         puts "hello, here are the courses"
         getFilters
         puts "Here are the classes:"
         #TODO: pass in filter params after implemented
-        @data_factory.courses(nil).each{|course| puts course}
+        @data_factory.courses(nil).each{|course| puts course.to_s}
 
     end
 
