@@ -15,6 +15,7 @@ class User_Input
     # Prompts user and gets input
     def main_menu_io
         main_menu
+        #TODO: input check
         input = STDIN.gets.chop
         case input
         when "0"
@@ -31,6 +32,7 @@ class User_Input
         @data_factory.courses(nil).each{|course| puts(Utility.wrap_string "\n#{course.to_s}", 90)}
         courses_menu
 
+        #TODO: input check
         input = STDIN.gets.chomp
         case input
         when "0"
