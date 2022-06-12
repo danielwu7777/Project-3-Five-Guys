@@ -1,9 +1,11 @@
 require_relative '../lib/course'
 # Created 6/9/2022 by Jake McCann
 # Edited 6/10/2022 by Noah Moon
+# Edited 6/11/2022 by Noah Moon
 class Serializer
   # Created 6/9/2022 by Jake McCann
   # Edited 6/10/2022 by Noah Moon : made class method, implemented method
+  # Edited 6/11/2022 by Noah Moon
   # courses_html: array of HTML sections where each element describes an entire course
   def self.serialize_courses(courses_html)
     # Convert courses_html into array of courses
@@ -11,10 +13,13 @@ class Serializer
     courses_html
 
     courses_html.each do |course_string|
+      # TODO: remove these comments
+      # ?<= is look-behind
+      # ?= is look-ahead
       num = course_string.match(/(?<=<span class=['|"]number['|"]>\().*?(?=\))/).to_s
       title = course_string.match(/(?<=<span class=['|"]title['|"]>).*?(?=<)/).to_s #or <span class='title'>.*?<\/span>
       desc = course_string.match(/(?<=class=['|"]label['|"]>Description:<\/span> )(.*?)(?=<)/ ).to_s
-      prereqs = course_string.match(/(?<=>\n)Pre.*?(?= <)/ ).to_s
+      prereqs = course_string.match(/Prereq:.*?(?= <)/ ).to_s
       hours = course_string.match(/(?<=Units:<\/span> ).*?(?=<)/).to_s
       course_list.unshift Course.new num, title, desc, prereqs, hours
     end

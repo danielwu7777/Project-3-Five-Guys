@@ -2,7 +2,7 @@
 # File edited 6/10/2022 by Noah Moon
 
 class Course
-  attr_reader :course_num, :course_title, :description, :prereqs, :hours, :prereqs, :hours
+  attr_reader :course_num, :course_title, :description, :prereqs, :hours
 
 =begin
 class_num = String - course catelog number. Ex. for cse3901, class_num = 3901
