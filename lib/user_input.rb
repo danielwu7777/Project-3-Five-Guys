@@ -1,6 +1,7 @@
 # File created 6/8/2022 by Daniel Wu 
 # File edited 6/11/2022 by Jake McCann
-require_relative('course_section_factory')
+require_relative 'course_section_factory'
+require_relative 'utility'
 
 class User_Input
 
@@ -27,7 +28,7 @@ class User_Input
     def courses_io
         system "clear"
         #TODO: print menu describing filters, get filters
-        @data_factory.courses(nil).each{|course| puts "\n#{course.to_s}"}
+        @data_factory.courses(nil).each{|course| puts(Utility.wrap_string "\n#{course.to_s}", 90)}
         courses_menu
 
         input = STDIN.gets.chomp
@@ -35,7 +36,7 @@ class User_Input
         when "0"
             main_menu_io
         when "1"
-            #TODO: make call to serializer
+            #TODO: make call to serializer to output html
         end
     end
 
