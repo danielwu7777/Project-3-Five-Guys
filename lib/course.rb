@@ -22,7 +22,7 @@ hours = String - credit hours for course. Ex. hours = "3"
   #Created 6/11/2022 by Noah Moon
   def to_s
     "Course Title: #{@course_title}\nCourse Number: #{@course_num}\nDescription: #{@description}\nPrereqs: #{@prereqs}"\
-    "\nHours: #{@hours}\n"
+    "\nHours: #{@hours}"
   end
 
 end

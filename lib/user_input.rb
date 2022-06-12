@@ -17,7 +17,7 @@ class User_Input
         getFilters
         puts "Here are the classes:"
         #TODO: pass in filter params after implemented
-        @data_factory.courses(nil).each{|course| puts course.to_s}
+        @data_factory.courses(nil).each{|course| puts "#{course.to_s}\n"}
 
     end
 
