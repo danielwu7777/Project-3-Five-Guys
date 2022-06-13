@@ -32,12 +32,14 @@ class Deserializer
   private
 
   # Created 6/12/2022 by Yuhao Yan
+  # Prints the header part of HTML
   def self.head_print file, title
     file.syswrite "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>"
     file.syswrite title + "</title>\n</head>\n"
   end
 
   # Created 6/12/2022 by Yuhao Yan
+  # Prints the body part of HTML
   def self.body_print file, sections
     file.syswrite "<body>\n"
 
@@ -49,6 +51,7 @@ class Deserializer
   end
 
   # Created 6/12/2022 by Yuhao Yan
+  # Prints a paragraph of a sigle section
   def self.section_print file, section
     file.syswrite "<p>\n"
 
