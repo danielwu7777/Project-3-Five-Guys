@@ -1,6 +1,7 @@
 require_relative '../lib/regex_factory'
 # File created 6/9/2022 by Jake McCann
 # Edited 6/11/2022 by Daniel Wu
+# Edited 6/13/2022 by Daniel Wu
 describe 'Regex_Factory' do
     # Created 6/11/2022 by Daniel Wu
     it 'filter course by class number' do
@@ -17,7 +18,6 @@ describe 'Regex_Factory' do
       filterHash = {"title" => "Introduction to Computing"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
       expected = /class=['|"]title['|"]>.*Introduction to Computing/
-
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
@@ -48,14 +48,39 @@ describe 'Regex_Factory' do
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
-=begin
-    # Created 6/11/2022 by Daniel Wu
+    # Created 6/13/2022 by Daniel Wu
     it 'filter course by class number and class hours' do
       filterHash = Hash.new
       filterHash = {"num" => "1110", "hrs" => "3"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = #TODO
+      expected = /class=['|"]number['|"]>\(1110\).*class=['|"]label['|"]>.*Units:<\/span>.*3/
       expect(result.to_s == expected.to_s).to be_truthy
     end
-=end
+
+    # Created 6/13/2022 by Daniel Wu
+    it 'filter course by class description and class number' do
+      filterHash = Hash.new
+      filterHash = {"descr" => "experience with personal computer", "num" => "1111"}
+      result = Regex_Factory.convert_course_filter_to_regex (filterHash)
+      expected = /class=['|"]label['|"]>Description.*experience with personal computer.*class=['|"]number['|"]>\(1111\)/
+      expect(result.to_s == expected.to_s).to be_truthy
+    end
+
+    # Created 6/13/2022 by Daniel Wu
+    it 'filter course by class title, class number, and class description' do
+      filterHash = Hash.new
+      filterHash = {"title" => "Computing Technology", "num" => "1110", "descr" => "Problem solving"}
+      result = Regex_Factory.convert_course_filter_to_regex (filterHash)
+      expected = /class=['|"]title['|"]>.*Computing Technology.*class=['|"]number['|"]>\(1110\).*class=['|"]label['|"]>Description.*Problem solving/
+      expect(result.to_s == expected.to_s).to be_truthy
+    end
+
+    # Created 6/13/2022 by Daniel Wu
+    it 'filter course by class title, number, description, prereqs, and hours' do
+      filterHash = Hash.new
+      filterHash = {"title" => "Computer-Assisted Problem Solving", "num" => "1111", "descr" => "Problem solving", "pre" => "1113", "hrs" => 3}
+      result = Regex_Factory.convert_course_filter_to_regex (filterHash)
+      expected = /class=['|"]title['|"]>.*Computer-Assisted Problem Solving.*class=['|"]number['|"]>\(1111\).*class=['|"]label['|"]>Description.*Problem solving.*Prereq:.*1113.*class=['|"]label['|"]>.*Units:<\/span>.*3/
+      expect(result.to_s == expected.to_s).to be_truthy
+    end
 end
