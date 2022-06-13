@@ -1,5 +1,9 @@
 #File created 6/9/2022 by Jake McCann
 # File Edited 6/10/2022 by Noah Moon
+require_relative 'web_wrapper'
+require_relative 'serializer'
+require_relative 'scraper'
+
 class Course_Section_Factory
 
   # Created 6/9/2022 by Jake McCann

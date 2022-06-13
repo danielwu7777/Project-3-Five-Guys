@@ -1,7 +1,7 @@
 # File Created 6/11/2022 by Noah Moon
 # File Edited 6/12/2022 by Noah Moon
-require_relative '../lib/Utility'
-describe 'Utility' do
+require_relative '../lib/utility'
+describe 'utility' do
 
   test_desc = "Spreadsheet and database modeling/programming concepts and techniques to solve business and engineering related problems; efficient/effective data handling, computational analysis and decision support."
   # Created 6/11/2022 by Noah Moon
