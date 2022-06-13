@@ -12,3 +12,5 @@ gem 'mechanize', '~> 2.8', '>= 2.8.4'
 
 gem 'nokogiri', '~> 1.13', '>= 1.13.6'
 # gem "nokogiri"
+
+gem 'launchy', '~> 2.2.0'

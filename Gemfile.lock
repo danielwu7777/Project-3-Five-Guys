@@ -9,6 +9,8 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
+    launchy (2.2.0)
+      addressable (~> 2.3)
     mechanize (2.8.4)
       addressable (~> 2.8)
       domain_name (~> 0.5, >= 0.5.20190701)
@@ -57,6 +59,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  launchy (~> 2.2.0)
   mechanize (~> 2.8, >= 2.8.4)
   nokogiri (~> 1.13, >= 1.13.6)
   rspec (~> 3.0)

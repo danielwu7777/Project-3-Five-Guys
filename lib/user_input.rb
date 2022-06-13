@@ -3,6 +3,8 @@
 require_relative 'course_section_factory'
 require_relative 'utility'
 require_relative 'safe_input'
+require_relative 'deserializer'
+require 'launchy'
 
 class User_Input
 
@@ -25,6 +27,7 @@ class User_Input
     end
 
     # Created 6/11/2022 by Jake McCann
+    # Edited 6/13/2022 by Noah Moon
     def courses_io
         system "clear"
         #TODO: print menu describing filters, get filters
@@ -36,6 +39,10 @@ class User_Input
             main_menu_io
         when "1"
             #TODO: make call to serializer to output html
+            Deserializer.print_courses_file @data_factory.courses(nil), "./Courses.html"
+            Launchy.open("./Courses.html")
+
+            return
         end
     end
 
