@@ -54,9 +54,10 @@ class Deserializer
   private
 
   # Created 6/12/2022 by Yuhao Yan
+  # Edited 6/13/2022 by Yuhao Yan: added tag attributes
   # Prints the header part of HTML
   def self.head_print(file, title)
-    file.syswrite "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>"
+    file.syswrite "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>"
     file.syswrite title + "</title>\n</head>\n"
   end
 
@@ -89,11 +90,11 @@ class Deserializer
   def self.course_print(file, course)
     file.syswrite "<p>\n"
 
-    file.syswrite "Course Title: " + course.course_title + "<br>"
-    file.syswrite "\nCourse Number: " + course.course_num + "<br>"
-    file.syswrite "\nDescription: " + course.description + "<br>"
-    file.syswrite "\nPrereqs: " + course.prereqs + "<br>"
-    file.syswrite "\nHours: " + course.hours + "<br>"
+    file.syswrite "Course Title: " + course.course_title + "<br/>"
+    file.syswrite "\nCourse Number: " + course.course_num + "<br/>"
+    file.syswrite "\nDescription: " + course.description + "<br/>"
+    file.syswrite "\nPrereqs: " + course.prereqs + "<br/>"
+    file.syswrite "\nHours: " + course.hours + "<br/>"
 
 
     file.syswrite "\n</p>\n"
@@ -107,14 +108,14 @@ class Deserializer
   def self.section_print(file, section)
     file.syswrite "<p>\n"
 
-    file.syswrite "section_num: " + section.section_num + "<br>"
-    file.syswrite "\nterm: " + section.term + "<br>"
-    file.syswrite "\nmode: " + section.mode + "<br>"
-    file.syswrite "\ncity: " + section.city + "<br>"
-    file.syswrite "\nbuilding: " + section.building + "<br>"
-    file.syswrite "\nroom_num: " + section.room + "<br>"
-    file.syswrite "\ndays_of_week: " + section.days + "<br>"
-    file.syswrite "\ntime: " + section.time + "<br>"
+    file.syswrite "section_num: " + section.section_num + "<br/>"
+    file.syswrite "\nterm: " + section.term + "<br/>"
+    file.syswrite "\nmode: " + section.mode + "<br/>"
+    file.syswrite "\ncity: " + section.city + "<br/>"
+    file.syswrite "\nbuilding: " + section.building + "<br/>"
+    file.syswrite "\nroom_num: " + section.room + "<br/>"
+    file.syswrite "\ndays_of_week: " + section.days + "<br/>"
+    file.syswrite "\ntime: " + section.time + "<br/>"
 
     file.syswrite "\n</p>\n"
 
