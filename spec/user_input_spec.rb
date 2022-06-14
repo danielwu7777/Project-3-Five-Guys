@@ -15,13 +15,13 @@ describe 'User_Input' do
     end
     sut = User_Input.new
 
-    expect{sut.main_menu_io}.to output(/correct/).to_stdout
+    expect{sut.main_io}.to output(/correct/).to_stdout
   end
 
   #Created 6/11/2022 by Jake McCann
   it 'triggers main menu when entering 0 in courses menu' do
     allow(STDIN).to receive(:gets).and_return "0\n"
-    allow_any_instance_of(User_Input).to receive(:main_menu_io) do
+    allow_any_instance_of(User_Input).to receive(:main_io) do
       puts "correct"
     end
     sut = User_Input.new
