@@ -1,5 +1,5 @@
 # File created 6/9/2022 by Jake McCann
-require_relative '../lib/Deserializer'
+require_relative "../lib/deserializer"
 
 #Runtime Testing Code:
 sections = Array.new
