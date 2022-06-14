@@ -2,4 +2,4 @@
 require_relative 'lib/user_input'
 
 ui = User_Input.new
-ui.main_menu_io
+ui.main_io
