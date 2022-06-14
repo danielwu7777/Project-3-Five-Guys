@@ -1,31 +1,14 @@
-#Craeted 6/12/2022 by Jake McCann
+#Created 6/12/2022 by Jake McCann
+#File edited 6/14/2022 by Jake McCann
 class Safe_Input
-
-  #Created 6/12/2022 by Jake McCann
-  # Gets and returns user menu choice
-  # options: array of menu options that are valid
-  def self.menu_choice(options)
-    input = STDIN.gets.chomp
-    while !options.include? input do
-      STDOUT.puts "invalid input received, try again"
-      input = STDIN.gets.chomp
-    end
-    input
-  end
-
   # Created 6/12/2022 by Jake McCann
-  # Gets and returns hash containing filter parms
-  def self.filter
-    #TODO: implement after figuring out what filter params need to look like
-  end
-
-  # Created 6/12/2022 by Jake McCann
-  # Gets and returns valid file path
-  def self.output_file
-    puts "Please enter output file name or path/name relative to current directory"
+  # Modified 6/14/2022 by Jake McCann consolidating safe input
+  # Gets and returns valid input based on regex
+  # regex: regex expression used to determine what is valid input
+  def self.safe_input regex
     input = STDIN.gets.chomp
-    while !/^(\/[a-z_\-\s0-9\.]+)*\w+\.html/.match?(input)
-      STDOUT.puts "invalid file name received, try again"
+    while !regex.match?(input)
+      yield if block_given?
       input = STDIN.gets.chomp
     end
     input

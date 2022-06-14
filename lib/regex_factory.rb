@@ -1,5 +1,6 @@
 # Created 6/8/2022 by Jake McCann
 # Edited 6/12/2022 by Daniel Wu
+# Edited 6/14/2022 by Jake McCann
 # Edited 6/14/2022 by Noah Moon
 class Regex_Factory
   # TODO: remove these comments
@@ -38,4 +39,18 @@ class Regex_Factory
     end
     return Regexp.new(regExpString)
   end
+
+=begin
+  Regex expression constants
+=end
+  FILE_REGEX = /^(\/[a-z_\-\s0-9\.]+)*\w+\.html|\n/
+  MAIN_OPTIONS_REGEX = Regexp.union %w[0 1]
+  COURSE_OPTIONS_REGEX = Regexp.union %w[0 1 2]
+  COURSE_NUM_REGEX = /\A\d{1,4}\Z|\n/
+  COURSE_TITLE_REGEX = /[A-Za-z0-9]|\n/
+  COURSE_DESC_REGEX = /[A-Za-z0-9]|\n/
+  COURSE_PRE_REGEX = /[A-Za-z0-9]|\n/
+  COURSE_HOURS_REGEX = /\b[1-6]\b|\n/
+
+
 end
