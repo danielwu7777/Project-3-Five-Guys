@@ -1,7 +1,16 @@
 # Created 6/8/2022 by Jake McCann
 # Edited 6/12/2022 by Daniel Wu
-
+# Edited 6/14/2022 by Noah Moon
 class Regex_Factory
+  # TODO: remove these comments
+  # ?<= is look-behind
+  # ?= is look-ahead
+  Serializer_course_num_regex = /(?<=<span class=['|"]number['|"]>\().*?(?=\))/
+  Serializer_course_title_regex = /(?<=<span class=['|"]title['|"]>).*?(?=<)/
+  Serializer_course_desc_regex = /(?<=class=['|"]label['|"]>Description:<\/span> ).*?(?=<)/
+  Serializer_course_prereq_regex = /(?<=Prereq: ).*?(?= <)/
+  Serializer_course_hours_regex = /(?<=Units:<\/span> ).*?(?=<)/
+
   # Created 6/8/2022 by Jake McCann
   # Edited 6/12/2022 by Daniel Wu: using TDD to implement method
   # Edited 6/13/2022 by Daniel Wu: added ability to iterate through hash
