@@ -26,7 +26,7 @@ describe 'User_Input' do
     end
     sut = User_Input.new
 
-    expect{sut.courses_io}.to output(/correct/).to_stdout
+    expect{sut.courses_io nil}.to output(/correct/).to_stdout
   end
 
   #Created 6/11/2022 by Jake McCann
@@ -37,7 +37,7 @@ describe 'User_Input' do
     allow_any_instance_of(Course).to receive(:to_s).and_return "am course"
     sut = User_Input.new
 
-    expect{sut.courses_io}.to output(/am course\n/).to_stdout
+    expect{sut.courses_io nil}.to output(/am course\n/).to_stdout
   end
 
   #Created 6/11/2022 by Jake McCann
@@ -48,7 +48,7 @@ describe 'User_Input' do
     allow_any_instance_of(Course).to receive(:to_s).and_return "am course"
     sut = User_Input.new
 
-    expect{sut.courses_io}.to output(/am course\n\s*am course\n/).to_stdout
+    expect{sut.courses_io nil}.to output(/am course\n\s*am course\n/).to_stdout
   end
 
 end
