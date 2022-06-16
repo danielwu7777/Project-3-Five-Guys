@@ -55,8 +55,6 @@ describe 'Regex_Factory' do
       filterHash = {"num" => "1110", "hrs" => "3"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
       expected = /class=['|"]number['|"]>\(1110\).*class=['|"]label['|"]>.*Units:<\/span>.*3/
-      puts result.to_s + "    result"
-      puts expected.to_s + "        expected"
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
