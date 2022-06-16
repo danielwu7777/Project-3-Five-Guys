@@ -15,7 +15,8 @@ hours = String - credit hours for course. Ex. hours = "3"
   # Created 6/9/2022 by Noah Moon
   # Edited 6/10/2022 by Noah Moon: added prereqs and hours
   # Edited 6/11/2022 by Noah Moon: added parallel assignment
-  def initialize(class_num, course_title, description, prereqs, hours)
+  # Edited 6/16/2022 by Yuhao Yan: parentheses removed
+  def initialize class_num, course_title, description, prereqs, hours
     @course_num , @course_title, @description, @prereqs, @hours = class_num, course_title, description, prereqs, hours
   end
 
