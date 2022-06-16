@@ -3,9 +3,12 @@
 require_relative 'section'
 require_relative './course'
 
+CSS_FILE = "../lib/style.css"
+
 class Deserializer
   # Created 6/8/2022 by Jake McCann
   # Edited 6/12/2022 by Yuhao Yan: Add implementation
+  # Edited 6/12/2022 by Yuhao Yan: Edit method call
   # @sections: array of section objects
   # @path: a relative file path and name for the HTML file
   # convert sections to html to be printed to file
@@ -20,7 +23,7 @@ class Deserializer
       title = sections[0].title if sections.size > 0
 
       head_print htm_file, title
-      body_print htm_file, sections
+      body_print htm_file, sections, title
 
     else
       puts "Unable to open file!"
@@ -55,17 +58,28 @@ class Deserializer
 
   # Created 6/12/2022 by Yuhao Yan
   # Edited 6/13/2022 by Yuhao Yan: added tag attributes
+  # Edited 6/16/2022 by Yuhao Yan: reimplement for CSS
   # Prints the header part of HTML
   def self.head_print(file, title)
     file.syswrite "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>"
-    file.syswrite title + "</title>\n</head>\n"
+    file.syswrite title + "</title>\n"
+    file.syswrite "<style>\n"
+
+    # print CSS codes into HTML file 
+    IO.foreach(CSS_FILE){|line| file.syswrite line + "\n"}
+
+    file.syswrite "</style>\n</head>\n"
   end
 
   # Created 6/12/2022 by Yuhao Yan
   # Edited 6/13/2022 by Noah Moon: added method parenthesis
+  # Edited 6/16/2022 by Yuhao Yan: add parameter @title
+  # Edited 6/16/2022 by Yuhao Yan: reimplement for CSS
   # Prints the body part of HTML
-  def self.body_print(file, sections)
+  def self.body_print(file, sections, title)
     file.syswrite "<body>\n"
+    file.syswrite "<div class=\"title\">\nAll sections selected under <span class=\"course\">"
+    file.syswrite title + "</span>:\n</div>\n"
 
     sections.each { |section| 
       section_print file, section
@@ -104,20 +118,34 @@ class Deserializer
 
   # Created 6/12/2022 by Yuhao Yan
   # Edited 6/13/2022 by Noah Moon: added method parenthesis
+  # Edited 6/16/2022 by Yuhao Yan: reimplement for CSS
   # Prints a paragraph of a sigle section
   def self.section_print(file, section)
-    file.syswrite "<p>\n"
 
-    file.syswrite "section_num: " + section.section_num + "<br/>"
-    file.syswrite "\nterm: " + section.term + "<br/>"
-    file.syswrite "\nmode: " + section.mode + "<br/>"
-    file.syswrite "\ncity: " + section.city + "<br/>"
-    file.syswrite "\nbuilding: " + section.building + "<br/>"
-    file.syswrite "\nroom_num: " + section.room + "<br/>"
-    file.syswrite "\ndays_of_week: " + section.days + "<br/>"
-    file.syswrite "\ntime: " + section.time + "<br/>"
+    file.syswrite "<div class=\"section\">\n"
+    file.syswrite "<table class=\"att_table\">\n"
 
-    file.syswrite "\n</p>\n"
+    file.syswrite "<tr><td>section_num:</td></tr>\n"
+    file.syswrite "<tr><td>term:</td></tr>\n"
+    file.syswrite "<tr><td>mode:</td></tr>\n"
+    file.syswrite "<tr><td>city:</td></tr>\n"
+    file.syswrite "<tr><td>building:</td></tr>\n"
+    file.syswrite "<tr><td>room_num:</td></tr>\n"
+    file.syswrite "<tr><td>days_of_week:</td></tr>\n"
+    file.syswrite "<tr><td>time:</td></tr>\n"
+
+    file.syswrite "</table>\n<table class=\"val_table\">\n"
+
+    file.syswrite "<tr><td>" + section.section_num + "</td></tr>\n"
+    file.syswrite "<tr><td>" + section.term + "</td></tr>\n"
+    file.syswrite "<tr><td>" + section.mode + "</td></tr>\n"
+    file.syswrite "<tr><td>" + section.city + "</td></tr>\n"
+    file.syswrite "<tr><td>" + section.building + "</td></tr>\n"
+    file.syswrite "<tr><td>" + section.room + "</td></tr>\n"
+    file.syswrite "<tr><td>" + section.days + "</td></tr>\n"
+    file.syswrite "<tr><td>" + section.time + "</td></tr>\n"
+
+    file.syswrite "</table>\n</div>\n"
 
   end
 
