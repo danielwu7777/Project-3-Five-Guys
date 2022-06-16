@@ -1,4 +1,5 @@
 # File created 6/9/2022 by Daniel Wu 
+# Edited 6/16/2022 by Yuhao Yan: parentheses removed
 require 'mechanize'
 
 class Web_Wrapper
@@ -18,7 +19,7 @@ class Web_Wrapper
 
     # Created 6/9/2022 by Daniel Wu
     # Returns string containing all HTML for sections of class_num at https://classes.osu.edu/class-search/#/
-    def sections_html(class_num)
+    def sections_html class_num
 
     end
 
