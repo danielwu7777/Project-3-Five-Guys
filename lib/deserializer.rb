@@ -8,11 +8,11 @@ CSS_FILE = "../lib/style.css"
 class Deserializer
   # Created 6/8/2022 by Jake McCann
   # Edited 6/12/2022 by Yuhao Yan: Add implementation
-  # Edited 6/12/2022 by Yuhao Yan: Edit method call
+  # Edited 6/16/2022 by Yuhao Yan: Edit method call
   # @sections: array of section objects
   # @path: a relative file path and name for the HTML file
   # convert sections to html to be printed to file
-  def self.print_file(sections, path)
+  def self.print_file sections, path
     # Open the HTML output file
     htm_file = File.new path, "w"
     
@@ -33,7 +33,8 @@ class Deserializer
   end
 
   # Created 6/13/2022 by Noah Moon
-  def self.print_courses_file(courses, path)
+  # Edited 6/16/2022 by Yuhao Yan
+  def self.print_courses_file courses, path
     # Open the HTML output file
     htm_file = File.new path, "w"
 
@@ -60,13 +61,13 @@ class Deserializer
   # Edited 6/13/2022 by Yuhao Yan: added tag attributes
   # Edited 6/16/2022 by Yuhao Yan: reimplement for CSS
   # Prints the header part of HTML
-  def self.head_print(file, title)
+  def self.head_print file, title
     file.syswrite "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>"
     file.syswrite title + "</title>\n"
     file.syswrite "<style>\n"
 
     # print CSS codes into HTML file 
-    IO.foreach(CSS_FILE){|line| file.syswrite line + "\n"}
+    IO.foreach(CSS_FILE) {|line| file.syswrite line}
 
     file.syswrite "</style>\n</head>\n"
   end
@@ -76,7 +77,7 @@ class Deserializer
   # Edited 6/16/2022 by Yuhao Yan: add parameter @title
   # Edited 6/16/2022 by Yuhao Yan: reimplement for CSS
   # Prints the body part of HTML
-  def self.body_print(file, sections, title)
+  def self.body_print file, sections, title
     file.syswrite "<body>\n"
     file.syswrite "<div class=\"title\">\nAll sections selected under <span class=\"course\">"
     file.syswrite title + "</span>:\n</div>\n"
@@ -89,7 +90,8 @@ class Deserializer
   end
 
   # Created 6/13/2022 by Noah Moon
-  def self.body_print_courses(file, courses)
+  # Edited 6/16/2022 by Yuhao Yan
+  def self.body_print_courses file, courses
     file.syswrite "<body>\n"
     file.syswrite "<h1>All Courses</h1>"
 
@@ -101,7 +103,8 @@ class Deserializer
   end
 
   # Created 6/13/2022 by Noah Moon
-  def self.course_print(file, course)
+  # Edited 6/16/2022 by Yuhao Yan
+  def self.course_print file, course
     file.syswrite "<p>\n"
 
     file.syswrite "Course Title: " + course.course_title + "<br/>"
@@ -120,7 +123,7 @@ class Deserializer
   # Edited 6/13/2022 by Noah Moon: added method parenthesis
   # Edited 6/16/2022 by Yuhao Yan: reimplement for CSS
   # Prints a paragraph of a sigle section
-  def self.section_print(file, section)
+  def self.section_print file, section
 
     file.syswrite "<div class=\"section\">\n"
     file.syswrite "<table class=\"att_table\">\n"
