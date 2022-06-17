@@ -3,7 +3,7 @@
 require_relative 'section'
 require_relative './course'
 
-CSS_FILE = "../lib/style.css"
+CSS_FILE = "./lib/style.css"
 
 class Deserializer
   # Created 6/8/2022 by Jake McCann
