@@ -15,9 +15,16 @@ class Course_Section_Factory
 
   # Created 6/9/2022 by Jake McCann
   # Edited 6/10/2022 by Noah Moon
-  def courses(filter_parameters)
-    # fetches and print html page of sections
-    Serializer.serialize_courses Scraper.scrape_courses filter_parameters, @web.courses_html
+  # Edited 6/16/2022 by Daniel Wu: Removed filter_parameter input to display all courses
+  def all_courses
+    # Fetches and print html page of all courses
+    Serializer.serialize_courses Scraper.scrape_all_courses @web.courses_html
+  end
+
+  # Created 6/16/2022 by Daniel Wu
+  def filter_courses(filter_as_regex)
+    # Filter the courses with regex input
+    Serializer.serialize_courses Scraper.scrape_courses(filter_as_regex, @web.courses_html)
   end
 
   # Created 6/9/2022 by Jake McCann

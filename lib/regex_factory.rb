@@ -6,6 +6,7 @@ class Regex_Factory
   # Created 6/8/2022 by Jake McCann
   # Edited 6/12/2022 by Daniel Wu: using TDD to implement method
   # Edited 6/13/2022 by Daniel Wu: added ability to iterate through hash
+  # Edited 6/16/2022 by Daniel Wu: Changed keys to be symbols instead of strings
   # filter_parameters: hash containing key-val pairs describing how user wants courses filtered
   def self.convert_course_filter_to_regex filter_parameters
     regExpString = ""
@@ -13,15 +14,15 @@ class Regex_Factory
     counter = 1
     filter_parameters.each do |key, value|
       case key
-        when "num"
+        when :num
             regExpString += "class=[\'|\"]number[\'|\"]>\\(#{value}\\)" 
-        when "title"
+        when :title
             regExpString += "class=[\'|\"]title[\'|\"]>.*#{value}"
-        when "descr"
+        when :descr
             regExpString += "class=[\'|\"]label[\'|\"]>Description.*#{value}"
-        when "pre"
+        when :pre
             regExpString += "Prereq:.*#{value}"
-        when "hrs"
+        when :hrs
             regExpString += "class=[\'|\"]label[\'|\"]>.*Units:<\/span>.*#{value}"
       end
       # Determines whether to append .* at the end of regExpString

@@ -29,8 +29,13 @@ class User_Input
 
     # Created 6/11/2022 by Jake McCann
     # Edited 6/13/2022 by Noah Moon
+    # Edited 6/16/2022 by Daniel Wu: Added if statement to output all courses or filtered courses
     def courses_io filter_hash
-        @data_factory.courses(filter_hash).each{|course| puts(Utility.wrap_string "\n#{course.to_s}", 90)}
+        if filter_hash == nil then
+            @data_factory.all_courses.each{|course| puts(Utility.wrap_string "\n#{course.to_s}", 90)}
+        else
+            @data_factory.filter_courses(filter_hash).each{|course| puts(Utility.wrap_string "\n#{course.to_s}", 90)}
+        end
         menu_template { courses_menu }
 
         case Safe_Input.safe_input(Regex_Factory::COURSE_OPTIONS_REGEX) { puts MENU_SELECTION_ERRMSG }
