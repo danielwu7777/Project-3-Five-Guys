@@ -82,9 +82,11 @@ class Deserializer
     file.syswrite "<div class=\"title\">\nAll sections selected under <span class=\"course\">"
     file.syswrite title + "</span>:\n</div>\n"
 
+    file.syswrite "<div class=\"content\">"
     sections.each { |section| 
       section_print file, section
     }
+    file.syswrite "</div>\n"
 
     file.syswrite "</body>\n</html>\n"
   end
