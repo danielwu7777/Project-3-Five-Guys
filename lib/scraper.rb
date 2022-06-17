@@ -1,6 +1,7 @@
 # Created 6/8/2022 by Jake McCann
 # Edited 6/11/2022 by Jake McCann
 # Edited 6/16/2022 by Yuhao Yan: parentheses removed
+# Edited 6/17/2022 by Noah Moon
 require 'nokogiri'
 
 class Scraper
@@ -13,6 +14,12 @@ class Scraper
     #get sections of html_to_scrape that follow filter_as_regex
     scrape_all_courses html_to_scrape
     #Once filtering is implemented, the array above can be searched through with filter_as_regex
+  end
+
+  # Created 6/17/2022 by Noah Moon
+  def self.scrape_sections(filter_as_regex, html_to_scrape)
+    array = Array.new
+    html_to_scrape.scan(/(?<={)"classNumber".*?(?="termCode")/) { |match|  array.push match}
   end
 
   private
