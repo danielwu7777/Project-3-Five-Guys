@@ -1,4 +1,5 @@
 # File created 6/9/2022 by Jake McCann
+# Edited 6/15/2022 by Yuhao Yan: Add more cases
 require_relative "../lib/deserializer"
 
 #Runtime Testing Code:
@@ -14,5 +15,5 @@ section8 = Section.new "10005", "summer", "face-to-face", "Columbus", "Kroger", 
 section9 = Section.new "10006", "summer", "face-to-face", "Columbus", "Kroger", "AISLE 4 ", "M T W F", "8:30 - 23:50"
 sections.push section1, section2, section3, section4, section5, section6, section7, section8, section9
 
-Deserializer.print_file sections,"../html_testing.html"
+Deserializer.print_file sections,"./html_testing.html"
 

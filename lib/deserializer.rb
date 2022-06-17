@@ -1,5 +1,6 @@
 # Created 6/8/2022 by Jake McCann
 # Edited 6/12/2022 by Yuhao Yan: Class implemented
+# Edited 6/16/2022 by Yuhao Yan: Reimplemented for adding CSS
 require_relative 'section'
 require_relative './course'
 
