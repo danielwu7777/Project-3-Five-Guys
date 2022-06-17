@@ -1,5 +1,6 @@
 # Created 6/8/2022 by Jake McCann
 # Edited 6/12/2022 by Yuhao Yan: Class implemented
+# Edited 6/16/2022 by Yuhao Yan: Reimplemented for adding CSS
 require_relative 'section'
 require_relative './course'
 
@@ -82,9 +83,11 @@ class Deserializer
     file.syswrite "<div class=\"title\">\nAll sections selected under <span class=\"course\">"
     file.syswrite title + "</span>:\n</div>\n"
 
+    file.syswrite "<div class=\"content\">"
     sections.each { |section| 
       section_print file, section
     }
+    file.syswrite "</div>\n"
 
     file.syswrite "</body>\n</html>\n"
   end
@@ -128,14 +131,14 @@ class Deserializer
     file.syswrite "<div class=\"section\">\n"
     file.syswrite "<table class=\"att_table\">\n"
 
-    file.syswrite "<tr><td>section_num:</td></tr>\n"
-    file.syswrite "<tr><td>term:</td></tr>\n"
-    file.syswrite "<tr><td>mode:</td></tr>\n"
-    file.syswrite "<tr><td>city:</td></tr>\n"
-    file.syswrite "<tr><td>building:</td></tr>\n"
-    file.syswrite "<tr><td>room_num:</td></tr>\n"
-    file.syswrite "<tr><td>days_of_week:</td></tr>\n"
-    file.syswrite "<tr><td>time:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">section_num<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">term<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">mode<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">city<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">building<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">room_num<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">days_of_week<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">time<span>:</td></tr>\n"
 
     file.syswrite "</table>\n<table class=\"val_table\">\n"
 
