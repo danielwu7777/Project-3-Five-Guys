@@ -50,19 +50,19 @@ class User_Input
         input = Safe_Input.safe_input(Regex_Factory::FILE_REGEX) { puts MENU_SELECTION_ERRMSG }
         Deserializer.print_courses_file @data_factory.courses(nil), input if input != 0
     end
-
+    # Edited 6/16/2022 by Daniel Wu: Added example input for each filter prompt
     def course_filter_io
         filter_hash = Hash.new
         menu_template {filter_menu}
-        print "Course number filter: "
+        print "Course number filter (example: 3901): "
         filter_hash[:num] = Safe_Input.safe_input(Regex_Factory::COURSE_NUM_REGEX) {puts COURSE_NUM_ERRMSG}
-        print"Course title filter: "
+        print"Course title filter (example: Survey of Artificial Intelligence): "
         filter_hash[:title] = Safe_Input.safe_input(Regex_Factory::COURSE_TITLE_REGEX) {puts COURSE_TITLE_ERRMSG}
-        print "Course description filter: "
+        print "Course description filter (example: Fundamental algorithms): "
         filter_hash[:desc] = Safe_Input.safe_input(Regex_Factory::COURSE_DESC_REGEX) {puts COURSE_DESC_ERRMSG}
-        print "Course prereqs filter: "
+        print "Course prereqs filter (example: 3241): "
         filter_hash[:pre] = Safe_Input.safe_input(Regex_Factory::COURSE_PRE_REGEX) {puts COURSE_PREREQ_ERRMSG}
-        print "Course hours filter: "
+        print "Course hours filter (example: 3): "
         filter_hash[:hrs] = Safe_Input.safe_input(Regex_Factory::COURSE_HOURS_REGEX) {puts COURSE_HOURS_ERRMSG}
         courses_io filter_hash
     end
@@ -104,9 +104,10 @@ class User_Input
     end
 
     #Created 6/14/2022 by Jake McCann
+    # Edited 6/16/2022 by Daniel Wu: Edited prompt for clarity
     def filter_menu
         puts "Enter the filter values for each course property"
-        puts "Do not enter anything if you do not wish to filter by that property"
+        puts "Just press enter if you do not wish to filter by that property"
     end
 
 =begin
