@@ -1,5 +1,6 @@
 # File created 6/9/2022 by Daniel Wu
 # File edited 6/14/2022 by Noah Moon
+# File edited 6/17/2022 by Noah Moon
 require 'mechanize'
 
 class Web_Wrapper
@@ -18,14 +19,20 @@ class Web_Wrapper
     end
 
     # Created 6/9/2022 by Daniel Wu
-    # Returns string containing all HTML for sections of class_num at https://classes.osu.edu/class-search/#/
+    # Edited 6/17/2022 by Noah Moon: added implementation
+    # Returns string containing all data for sections of class_num
     def sections_html(class_num)
-
-        #page = @web_client.post("https://content.osu.edu/v2/classes/search?" "q" => "cse 2221", "client" => "class-search-ui", "campus" => "col", "term" => "1224").body
-        @web_client.get("https://content.osu.edu/v2/classes/search?q=cse%202221&client=class-search-ui&campus=col&term=1224").body
+       @web_client.get("https://content.osu.edu/v2/classes/search?q=cse%20#{class_num}").body
+                          .match(Regexp.new "(?<=\"sections\":).*\"catalogNumber\":\"#{class_num}\".*?(?={\"course\")").to_s
     end
 
 end
 
+=begin
+file = File.new "./test.txt", "w"
 web = Web_Wrapper.new
-puts web.sections_html 1
+x =  web.sections_html 2221
+array = Array.new
+x.scan(/(?<={)"classNumber".*?(?="termCode")/) { |match|  array.push match}
+puts array[0].to_s
+=end

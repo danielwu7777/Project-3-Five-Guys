@@ -1,17 +1,24 @@
 # Created 6/8/2022 by Jake McCann
 # Edited 6/11/2022 by Jake McCann
+# Edited 6/17/2022 by Noah Moon
 require 'nokogiri'
+require_relative './regex_factory'
 
 class Scraper
   # Created 6/8/2022 by Jake McCann
   # Edited 6/11/2022 by Jake McCann
   # filter_as_regex: regex representation of user filter parameters
   # html_to_scrape: html representation of page to be scraped
-
   def self.scrape_courses(filter_as_regex, html_to_scrape)
     #get sections of html_to_scrape that follow filter_as_regex
     scrape_all_courses html_to_scrape
     #Once filtering is implemented, the array above can be searched through with filter_as_regex
+  end
+
+  # Created 6/17/2022 by Noah Moon
+  def self.scrape_sections(filter_as_regex, html_to_scrape)
+    array = Array.new
+    html_to_scrape.scan(/(?<={)"classNumber".*?(?="termCode")/) { |match|  array.push match}
   end
 
   private

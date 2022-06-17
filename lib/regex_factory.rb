@@ -11,6 +11,7 @@ class Regex_Factory
   Serializer_course_prereq_regex = /(?<=Prereq: ).*?(?= <)/
   Serializer_course_hours_regex = /(?<=Units:<\/span> ).*?(?=<)/
 
+
   # Created 6/8/2022 by Jake McCann
   # Edited 6/12/2022 by Daniel Wu: using TDD to implement method
   # Edited 6/13/2022 by Daniel Wu: added ability to iterate through hash
