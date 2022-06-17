@@ -6,11 +6,14 @@ body{
     background-color:rgb(26, 25, 27);
     font-size: 13px;
 }
-table{
-    line-height: 30px;
-}
 .att_table{
+
     float:left;
+}
+span{
+    color:rgb(238, 229, 229);
+}
+span.attribute{
     color:rgb(198, 56, 90);
 }
 .val_table{
@@ -37,5 +40,6 @@ table{
 
 .content{
     margin:30px;
+    line-height: 27px;
 }
 

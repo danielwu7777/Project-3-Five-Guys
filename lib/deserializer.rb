@@ -130,14 +130,14 @@ class Deserializer
     file.syswrite "<div class=\"section\">\n"
     file.syswrite "<table class=\"att_table\">\n"
 
-    file.syswrite "<tr><td>section_num:</td></tr>\n"
-    file.syswrite "<tr><td>term:</td></tr>\n"
-    file.syswrite "<tr><td>mode:</td></tr>\n"
-    file.syswrite "<tr><td>city:</td></tr>\n"
-    file.syswrite "<tr><td>building:</td></tr>\n"
-    file.syswrite "<tr><td>room_num:</td></tr>\n"
-    file.syswrite "<tr><td>days_of_week:</td></tr>\n"
-    file.syswrite "<tr><td>time:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">section_num<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">term<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">mode<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">city<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">building<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">room_num<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">days_of_week<span>:</td></tr>\n"
+    file.syswrite "<tr><td><span class=\"attribute\">time<span>:</td></tr>\n"
 
     file.syswrite "</table>\n<table class=\"val_table\">\n"
 
