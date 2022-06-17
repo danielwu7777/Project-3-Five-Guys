@@ -1,4 +1,5 @@
 # File created 6/9/2022 by Noah Moon
+# Edited 6/16/2022 by Yuhao Yan: parentheses removed
 
 class Section
   attr_reader :section_num,:term,:mode,:city,:building,:room,:days,:time
@@ -16,7 +17,7 @@ time = String - range of class time
 
 =end
   # Created 6/9/2022 by Noah Moon
-  def initialize(section_num, term, mode, city, building, room_num, days_of_week, time, course_title = nil)
+  def initialize section_num, term, mode, city, building, room_num, days_of_week, time, course_title = nil
     @section_num = section_num
     @term = term
     @mode = mode

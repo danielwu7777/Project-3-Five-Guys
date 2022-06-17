@@ -1,5 +1,6 @@
 # File created 6/8/2022 by Daniel Wu 
 # File edited 6/11/2022 by Jake McCann
+# Edited 6/16/2022 by Yuhao Yan: parentheses removed
 require_relative 'course_section_factory'
 require_relative 'utility'
 require_relative 'safe_input'
@@ -38,7 +39,7 @@ class User_Input
             main_io
         when "1"
             file_io
-            Launchy.open("./Courses.html")
+            Launchy.open "./Courses.html"
         when "2"
             course_filter_io
         end

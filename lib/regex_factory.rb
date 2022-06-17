@@ -1,6 +1,8 @@
 # Created 6/8/2022 by Jake McCann
 # Edited 6/12/2022 by Daniel Wu
 # Edited 6/14/2022 by Jake McCann
+# Edited 6/16/2022 by Yuhao Yan: parentheses removed
+
 
 class Regex_Factory
   # Created 6/8/2022 by Jake McCann
@@ -28,7 +30,7 @@ class Regex_Factory
       if counter != filter_parameters.size then regExpString += ".*" end
       counter += 1
     end
-    return Regexp.new(regExpString)
+    return Regexp.new regExpString
   end
 
 =begin
