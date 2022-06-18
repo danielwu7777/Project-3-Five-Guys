@@ -1,5 +1,6 @@
 # File created 6/9/2022 by Daniel Wu 
 # Edited 6/16/2022 by Yuhao Yan: parentheses removed
+# Edited 6/17/2022 by Noah Moon
 require 'mechanize'
 
 class Web_Wrapper
@@ -18,9 +19,21 @@ class Web_Wrapper
     end
 
     # Created 6/9/2022 by Daniel Wu
+    # Edited 6/17/2022 by Noah Moon
     # Returns string containing all HTML for sections of class_num at https://classes.osu.edu/class-search/#/
-    def sections_html class_num
-
+    def sections_html(class_num)
+        @web_client.get("https://content.osu.edu/v2/classes/search?q=cse%20#{class_num}").body
+                   .match(Regexp.new "(?<=\"sections\":).*\"catalogNumber\":\"#{class_num}\".*?(?={\"course\")").to_s
     end
 
 end
+
+=begin
+file = File.new "./test.txt", "w"
+web = Web_Wrapper.new
+x =  web.sections_html 2221
+array = Array.new
+x.scan(/(?<={)"classNumber".*?(?="termCode")/) { |match|  array.push match}
+puts array[0].to_s
+=end
+
