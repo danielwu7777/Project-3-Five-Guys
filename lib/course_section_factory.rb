@@ -23,8 +23,11 @@ class Course_Section_Factory
 
   # Created 6/9/2022 by Jake McCann
   # Edited 6/10/2022 by Noah Moon
-  def sections filter_parameters
-    # Return array of section objects (array for order)
+  # Edited 6/10/2022 by Noah Moon
+  def sections filter_parameters, course_num
+    # fetches and print html page of sections
+    Serializer.serialize_sections Scraper.scrape_sections filter_parameters, @web.sections_html(course_num)
   end
+
 
 end

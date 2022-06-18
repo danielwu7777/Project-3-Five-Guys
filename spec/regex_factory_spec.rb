@@ -171,4 +171,33 @@ describe 'Regex_Factory' do
     it 'accepts empty credit hour' do
       expect(Regex_Factory::COURSE_HOURS_REGEX.match?("\n")).to be_truthy
     end
+
+    it 'filter section by section number' do
+      filterHash = {"sec_num" => "0005"}
+      result = Regex_Factory.convert_section_filter_to_regex filterHash
+      expected = Regexp.new "\"classNumber\".*?\"section\":\"0005\".*?\"termCode\""
+      expect(result.to_s == expected.to_s).to be_truthy
+    end
+
+    it 'filter section by mode' do
+      filterHash = {"mode" => "In Person"}
+      result = Regex_Factory.convert_section_filter_to_regex filterHash
+      expected = Regexp.new "\"classNumber\".*?\"instructionMode\":\"In Person\".*?\"termCode\""
+      expect(result.to_s == expected.to_s).to be_truthy
+    end
+
+    it 'filter section by building' do
+      filterHash = {"building" => "DREESE"}
+      result = Regex_Factory.convert_section_filter_to_regex filterHash
+      expected = Regexp.new "\"classNumber\".*?\"facilityDescription\":\"DREESE\".*?\"termCode\""
+      expect(result.to_s == expected.to_s).to be_truthy
+    end
+    it 'filter section by all filters' do
+      filterHash = {"sec_num" => "0005", "mode" => "In Person", "building" => "Dreese Laboratories", "room" => "357","start_time" => "8:00 am",
+      "end_time" => "8:55 am", "term" => "Spring 2022", "city" => "Columbus"}
+      result = Regex_Factory.convert_section_filter_to_regex filterHash
+      expected = Regexp.new "\"classNumber\".*?\"section\":\"0005\".*?\"instructionMode\":\"In Person\".*?\"facilityDescription\":\"Dreese Laboratories\".*?\"room\":\"357\".*?\"startTime\":\"8:00 am\".*?\"endTime\":\"8:55 am\".*?\"term\":\"Spring 2022\".*?\"campus\":\"Columbus\".*?\"termCode\""
+      puts result.to_s
+      expect(result.to_s == expected.to_s).to be_truthy
+    end
 end
