@@ -5,83 +5,92 @@ require_relative '../lib/regex_factory'
 # Edited 6/14/2022 by Jake McCann
 describe 'Regex_Factory' do
     # Created 6/11/2022 by Daniel Wu
+    # Edited 6/18/2022 by Noah Moon
     it 'filter course by class number' do
       filterHash = Hash.new
       filterHash = {"num" => "1110"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /class=['|"]number['|"]>\(1110\)/
+      expected = /class=['|"]number['|"]>(1110)<\/span>.*?/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
     # Created 6/12/2022 by Daniel Wu
+    # Edited 6/18/2022 by Noah Moon
     it 'filter course by class title' do
       filterHash = Hash.new
       filterHash = {"title" => "Introduction to Computing"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /class=['|"]title['|"]>.*Introduction to Computing/
+      expected = /<h4 class=['|"]title['|"]>.*?Introduction to Computing.*?(?=<span class=['|"]number['|"]>).*?/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
     # Created 6/12/2022 by Daniel Wu
+    # Edited 6/18/2022 by Noah Moon
     it 'filter course by class description' do
       filterHash = Hash.new
       filterHash = {"descr" => "A course of general interest giving"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /class=['|"]label['|"]>Description.*A course of general interest giving/
+      expected = /class=['|"]label['|"]>Description.*?A course of general interest giving.*?(?=Prereq:).*?/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
     # Created 6/12/2022 by Daniel Wu
+    # Edited 6/18/2022 by Noah Moon
     it 'filter course by class prereqs' do
       filterHash = Hash.new
-      filterHash = {"pre" => "Not open to students with credit for 1112"}
+      filterHash = {"pre" => "1112"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected =/Prereq:.*Not open to students with credit for 1112/
+      expected =/Prereq:.*?1112.*?<span class=['|"]label['|"]>.*?/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
     # Created 6/12/2022 by Daniel Wu
+    # Edited 6/18/2022 by Noah Moon
     it 'filter course by class hours' do
       filterHash = Hash.new
       filterHash = {"hrs" => "3"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /class=['|"]label['|"]>.*Units:<\/span>.*3/ 
+      expected = /Units:<\/span> 3<\/p>/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
     # Created 6/13/2022 by Daniel Wu
+    # Edited 6/18/2022 by Noah Moon
     it 'filter course by class number and class hours' do
       filterHash = Hash.new
       filterHash = {"num" => "1110", "hrs" => "3"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /class=['|"]number['|"]>\(1110\).*class=['|"]label['|"]>.*Units:<\/span>.*3/
+      expected = /class=['|"]number['|"]>(1110)<\/span>.*?Units:<\/span> 3<\/p>/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
     # Created 6/13/2022 by Daniel Wu
+    # Edited 6/18/2022 by Noah Moon
     it 'filter course by class description and class number' do
       filterHash = Hash.new
       filterHash = {"descr" => "experience with personal computer", "num" => "1111"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /class=['|"]label['|"]>Description.*experience with personal computer.*class=['|"]number['|"]>\(1111\)/
+      expected = /class=['|"]label['|"]>Description.*?experience with personal computer.*?(?=Prereq:).*?class=['|"]number['|"]>(1111)<\/span>.*?/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
     # Created 6/13/2022 by Daniel Wu
+    # Edited 6/18/2022 by Noah Moon
     it 'filter course by class title, class number, and class description' do
       filterHash = Hash.new
       filterHash = {"title" => "Computing Technology", "num" => "1110", "descr" => "Problem solving"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /class=['|"]title['|"]>.*Computing Technology.*class=['|"]number['|"]>\(1110\).*class=['|"]label['|"]>Description.*Problem solving/
+      expected = /<h4 class=['|"]title['|"]>.*?Computing Technology.*?(?=<span class=['|"]number['|"]>).*?class=['|"]number['|"]>(1110)<\/span>.*?class=['|"]label['|"]>Description.*?Problem solving.*?(?=Prereq:).*?/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
     # Created 6/13/2022 by Daniel Wu
+    # Edited 6/18/2022 by Noah Moon
     it 'filter course by class title, number, description, prereqs, and hours' do
       filterHash = Hash.new
       filterHash = {"title" => "Computer-Assisted Problem Solving", "num" => "1111", "descr" => "Problem solving", "pre" => "1113", "hrs" => 3}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /class=['|"]title['|"]>.*Computer-Assisted Problem Solving.*class=['|"]number['|"]>\(1111\).*class=['|"]label['|"]>Description.*Problem solving.*Prereq:.*1113.*class=['|"]label['|"]>.*Units:<\/span>.*3/
+      expected = /<h4 class=['|"]title['|"]>.*?Computer-Assisted Problem Solving.*?(?=<span class=['|"]number['|"]>).*?class=['|"]number['|"]>(1111)<\/span>.*?class=['|"]label['|"]>Description.*?Problem solving.*?(?=Prereq:).*?Prereq:.*?1113.*?<span class=['|"]label['|"]>.*?Units:<\/span> 3<\/p>/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
@@ -197,7 +206,6 @@ describe 'Regex_Factory' do
       "end_time" => "8:55 am", "term" => "Spring 2022", "city" => "Columbus"}
       result = Regex_Factory.convert_section_filter_to_regex filterHash
       expected = Regexp.new "\"classNumber\".*?\"section\":\"0005\".*?\"instructionMode\":\"In Person\".*?\"facilityDescription\":\"Dreese Laboratories\".*?\"room\":\"357\".*?\"startTime\":\"8:00 am\".*?\"endTime\":\"8:55 am\".*?\"term\":\"Spring 2022\".*?\"campus\":\"Columbus\".*?\"termCode\""
-      puts result.to_s
       expect(result.to_s == expected.to_s).to be_truthy
     end
 end
