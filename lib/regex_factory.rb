@@ -12,9 +12,43 @@ class Regex_Factory
   Serializer_course_prereq_regex = /(?<=Prereq: ).*?(?= <)/
   Serializer_course_hours_regex = /(?<=Units:<\/span> ).*?(?=<)/
 
+  Section_start_regex = "\"classNumber\".*?"
+  Section_end_regex = "\"termCode\""
+
+  # Created 6/17/2022 by Noah Moon
+  def self.convert_section_filter_to_regex filter_parameters
+    regExpString = Section_start_regex
+    # Counter to know when at the last key-val pair in hash
+    filter_parameters.each do |key, value|
+      case key
+        when "sec_num"
+            regExpString += "(\"section\":\"#{value}\").*?"
+        when "mode"
+            regExpString += "\"instructionMode\":\"#{value}\".*?"
+        when "building"
+            regExpString += "\"instructionMode\":\"In Person\".*?\"facilityDescription\":\"#{value}\".*?"
+        when "room"
+            regExpString += "\"room\":\"#{value}\".*?"
+        when "start_time"
+            regExpString += "\"startTime\":\"#{value}\".*?"
+        when "end_time"
+          regExpString += "\"endTime\":\"#{value}\".*?"
+        when "days"
+          regExpString += "#{value}.*?"
+        when "term"
+          regExpString += "\"term\":\"#{value}\".*?"
+        when "city"
+          regExpString += "\"campus\":\"#{value}\".*?"
+      end
+    end
+    regExpString += Section_end_regex
+    return Regexp.new regExpString
+  end
+
   # Created 6/8/2022 by Jake McCann
   # Edited 6/12/2022 by Daniel Wu: using TDD to implement method
   # Edited 6/13/2022 by Daniel Wu: added ability to iterate through hash
+  # Edited 6/17/2022 by Noah Moon
   # filter_parameters: hash containing key-val pairs describing how user wants courses filtered
   def self.convert_course_filter_to_regex filter_parameters
     regExpString = ""
@@ -22,16 +56,16 @@ class Regex_Factory
     counter = 1
     filter_parameters.each do |key, value|
       case key
-        when "num"
-            regExpString += "class=[\'|\"]number[\'|\"]>\\(#{value}\\)" 
-        when "title"
-            regExpString += "class=[\'|\"]title[\'|\"]>.*#{value}"
-        when "descr"
-            regExpString += "class=[\'|\"]label[\'|\"]>Description.*#{value}"
-        when "pre"
-            regExpString += "Prereq:.*#{value}"
-        when "hrs"
-            regExpString += "class=[\'|\"]label[\'|\"]>.*Units:<\/span>.*#{value}"
+      when "num"
+        regExpString += "class=[\'|\"]number[\'|\"]>\\(#{value}\\)"
+      when "title"
+        regExpString += "class=[\'|\"]title[\'|\"]>.*#{value}"
+      when "descr"
+        regExpString += "class=[\'|\"]label[\'|\"]>Description.*#{value}"
+      when "pre"
+        regExpString += "Prereq:.*#{value}"
+      when "hrs"
+        regExpString += "class=[\'|\"]label[\'|\"]>.*Units:<\/span>.*#{value}"
       end
       # Determines whether to append .* at the end of regExpString
       if counter != filter_parameters.size then regExpString += ".*" end

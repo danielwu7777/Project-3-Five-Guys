@@ -171,4 +171,11 @@ describe 'Regex_Factory' do
     it 'accepts empty credit hour' do
       expect(Regex_Factory::COURSE_HOURS_REGEX.match?("\n")).to be_truthy
     end
+
+    it 'filter section by section number' do
+      filterHash = {"sec_num" => "0005"}
+      result = Regex_Factory.convert_section_filter_to_regex filterHash
+      expected = Regexp.new "\"classNumber\".*?(\"section\":\"0005\").*?\"termCode\""
+      expect(result.to_s == expected.to_s).to be_truthy
+    end
 end

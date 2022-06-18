@@ -2,7 +2,7 @@
 # Edited 6/16/2022 by Yuhao Yan: parentheses removed
 
 class Section
-  attr_reader :section_num,:term,:mode,:city,:building,:room,:days,:time
+  attr_reader :section_num,:term,:mode,:city,:building,:room,:days,:start_time, :end_time
 
 =begin
 course_title = String - name of course. optional after next instance
@@ -13,11 +13,11 @@ city = String - name of city: Columbus, Mansfield, Newark, ect.
 building = String - name of building
 room_num = String - room number within building
 days_of_week = String - days of classes
-time = String - range of class time
+start_time = String - range of class start_time
 
 =end
   # Created 6/9/2022 by Noah Moon
-  def initialize section_num, term, mode, city, building, room_num, days_of_week, time, course_title = nil
+  def initialize section_num, term, mode, city, building, room_num, days_of_week, start_time, end_time, course_title = nil
     @section_num = section_num
     @term = term
     @mode = mode
@@ -25,7 +25,8 @@ time = String - range of class time
     @building = building
     @room = room_num
     @days = days_of_week
-    @time = time
+    @start_time = start_time
+    @end_time = end_time
     @@course_title = course_title if course_title != nil
   end
   #returns title, necessary because attr_reader does not work for class vars
