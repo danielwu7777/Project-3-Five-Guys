@@ -1,6 +1,7 @@
 # Created 6/8/2022 by Jake McCann
 # Edited 6/12/2022 by Yuhao Yan: Class implemented
 # Edited 6/16/2022 by Yuhao Yan: Reimplemented for adding CSS
+# Edited 6/18/2022 by Yuhao Yan: to match section.rb changes
 require_relative 'section'
 require_relative './course'
 
@@ -125,6 +126,7 @@ class Deserializer
   # Created 6/12/2022 by Yuhao Yan
   # Edited 6/13/2022 by Noah Moon: added method parenthesis
   # Edited 6/16/2022 by Yuhao Yan: reimplement for CSS
+  # Edited 6/18/2022 by Yuhao Yan: to match section.rb changes
   # Prints a paragraph of a sigle section
   def self.section_print file, section
 
@@ -149,7 +151,7 @@ class Deserializer
     file.syswrite "<tr><td>" + section.building + "</td></tr>\n"
     file.syswrite "<tr><td>" + section.room + "</td></tr>\n"
     file.syswrite "<tr><td>" + section.days + "</td></tr>\n"
-    file.syswrite "<tr><td>" + section.time + "</td></tr>\n"
+    file.syswrite "<tr><td>" + section.start_time + " - " + section.end_time + "</td></tr>\n"
 
     file.syswrite "</table>\n</div>\n"
 
