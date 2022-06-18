@@ -10,7 +10,7 @@ describe 'Regex_Factory' do
       filterHash = Hash.new
       filterHash = {"num" => "1110"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /class=['|"]number['|"]>(1110)<\/span>.*?/
+      expected = /class=['|"]number['|"]>\(1110\)<\/span>.*?.*/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
@@ -20,7 +20,7 @@ describe 'Regex_Factory' do
       filterHash = Hash.new
       filterHash = {"title" => "Introduction to Computing"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /<h4 class=['|"]title['|"]>.*?Introduction to Computing.*?(?=<span class=['|"]number['|"]>).*?/
+      expected = /<h4 class=['|"]title['|"]>.*?Introduction to Computing.*?(?=<span class=['|"]number['|"]>).*?.*/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
@@ -30,7 +30,7 @@ describe 'Regex_Factory' do
       filterHash = Hash.new
       filterHash = {"descr" => "A course of general interest giving"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /class=['|"]label['|"]>Description.*?A course of general interest giving.*?(?=Prereq:).*?/
+      expected = /class=['|"]label['|"]>Description.*?A course of general interest giving.*?(?=Prereq:).*?.*/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
@@ -40,7 +40,7 @@ describe 'Regex_Factory' do
       filterHash = Hash.new
       filterHash = {"pre" => "1112"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected =/Prereq:.*?1112.*?<span class=['|"]label['|"]>.*?/
+      expected =/Prereq:.*?1112.*?<span class=['|"]label['|"]>.*?.*/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
@@ -50,7 +50,7 @@ describe 'Regex_Factory' do
       filterHash = Hash.new
       filterHash = {"hrs" => "3"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /Units:<\/span> 3<\/p>/
+      expected = /Units:<\/span> 3<\/p>.*?.*/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
@@ -60,7 +60,7 @@ describe 'Regex_Factory' do
       filterHash = Hash.new
       filterHash = {"num" => "1110", "hrs" => "3"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /class=['|"]number['|"]>(1110)<\/span>.*?Units:<\/span> 3<\/p>/
+      expected = /class=['|"]number['|"]>\(1110\)<\/span>.*?Units:<\/span> 3<\/p>.*?.*/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
@@ -70,7 +70,7 @@ describe 'Regex_Factory' do
       filterHash = Hash.new
       filterHash = {"descr" => "experience with personal computer", "num" => "1111"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /class=['|"]label['|"]>Description.*?experience with personal computer.*?(?=Prereq:).*?class=['|"]number['|"]>(1111)<\/span>.*?/
+      expected = /class=['|"]label['|"]>Description.*?experience with personal computer.*?(?=Prereq:).*?class=['|"]number['|"]>\(1111\)<\/span>.*?.*/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
@@ -80,7 +80,7 @@ describe 'Regex_Factory' do
       filterHash = Hash.new
       filterHash = {"title" => "Computing Technology", "num" => "1110", "descr" => "Problem solving"}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /<h4 class=['|"]title['|"]>.*?Computing Technology.*?(?=<span class=['|"]number['|"]>).*?class=['|"]number['|"]>(1110)<\/span>.*?class=['|"]label['|"]>Description.*?Problem solving.*?(?=Prereq:).*?/
+      expected = /<h4 class=['|"]title['|"]>.*?Computing Technology.*?(?=<span class=['|"]number['|"]>).*?class=['|"]number['|"]>\(1110\)<\/span>.*?class=['|"]label['|"]>Description.*?Problem solving.*?(?=Prereq:).*?.*/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
@@ -90,7 +90,7 @@ describe 'Regex_Factory' do
       filterHash = Hash.new
       filterHash = {"title" => "Computer-Assisted Problem Solving", "num" => "1111", "descr" => "Problem solving", "pre" => "1113", "hrs" => 3}
       result = Regex_Factory.convert_course_filter_to_regex (filterHash)
-      expected = /<h4 class=['|"]title['|"]>.*?Computer-Assisted Problem Solving.*?(?=<span class=['|"]number['|"]>).*?class=['|"]number['|"]>(1111)<\/span>.*?class=['|"]label['|"]>Description.*?Problem solving.*?(?=Prereq:).*?Prereq:.*?1113.*?<span class=['|"]label['|"]>.*?Units:<\/span> 3<\/p>/
+      expected = /<h4 class=['|"]title['|"]>.*?Computer-Assisted Problem Solving.*?(?=<span class=['|"]number['|"]>).*?class=['|"]number['|"]>\(1111\)<\/span>.*?class=['|"]label['|"]>Description.*?Problem solving.*?(?=Prereq:).*?Prereq:.*?1113.*?<span class=['|"]label['|"]>.*?Units:<\/span> 3<\/p>.*?.*/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 

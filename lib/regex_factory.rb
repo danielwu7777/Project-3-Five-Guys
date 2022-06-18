@@ -68,7 +68,7 @@ class Regex_Factory
     filter_parameters.each do |key, value|
       case key
       when "num"
-        regExpString += "class=[\'|\"]number[\'|\"]>\(#{value}\)<\/span>.*?"
+        regExpString += "class=[\'|\"]number[\'|\"]>\\(#{value}\\)<\/span>.*?"
       when "title"
         regExpString += "<h4 class=[\'|\"]title[\'|\"]>.*?#{value}.*?(?=<span class=[\'|\"]number[\'|\"]>).*?"
       when "descr"
@@ -76,9 +76,10 @@ class Regex_Factory
       when "pre"
         regExpString += "Prereq:.*?#{value}.*?<span class=[\'|\"]label[\'|\"]>.*?"
       when "hrs"
-        regExpString += "Units:<\/span> #{value}<\/p>"
+        regExpString += "Units:<\/span> #{value}<\/p>.*?"
       end
     end
+    regExpString += ".*"
     return Regexp.new regExpString
   end
 
