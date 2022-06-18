@@ -27,7 +27,31 @@ class Serializer
   # Created 6/9/2022 by Jake McCann
   # Edited 6/10/2022 by Noah Moon : made class method
   # sections_html: array of HTML sections where each element describes an entire section
-  def self.serialize_sections sections_html
+  def self.serialize_sections sections_string_array
     # Convert sections_html into array of sections
+    section_list = Array.new
+    sections_string_array.each do |section_string|
+      section_list.unshift Section.new section_string.match(Regex_Factory::Serializer_section_secnum_regex).to_s,
+                                       section_string.match(Regex_Factory::Serializer_section_term_regex).to_s,
+                                       section_string.match(Regex_Factory::Serializer_section_mode_regex).to_s,
+                                       section_string.match(Regex_Factory::Serializer_section_city_regex).to_s,
+                                       section_string.match(Regex_Factory::Serializer_section_building_regex).to_s,
+                                       section_string.match(Regex_Factory::Serializer_section_room_regex).to_s,
+                                       Serializer.days_string(section_string.match(Regex_Factory::Serializer_section_days_regex).to_s),
+                                       section_string.match(Regex_Factory::Serializer_section_start_regex).to_s,
+                                       section_string.match(Regex_Factory::Serializer_section_end_regex).to_s,
+                                       section_string.match(Regex_Factory::Serializer_section_title_regex).to_s
+    end
+    section_list
+  end
+
+  private
+  # returns well formed string of days of the week from raw data string
+  def self.days_string raw_string
+    days_enum = %w[M Tu W Th F Sa Su]
+    new_String = ""
+    raw_string.split(',').each_with_index { |day_line,index |  new_String += days_enum[index] + " " if day_line.split(':')[1] == "true"}
+    new_String
+
   end
 end

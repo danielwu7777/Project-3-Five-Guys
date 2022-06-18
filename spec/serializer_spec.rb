@@ -1,5 +1,6 @@
 require_relative '../lib/serializer'
 require_relative '../lib/course'
+require_relative '../lib/section'
 # File created 6/9/2022 by Jake McCann
 # Edited 6/10/2022 by Noah Moon
 # Edited 6/11/2022 by Noah Moon
@@ -123,6 +124,62 @@ describe 'Serializer' do
     title, num, desc, prereqs, hours = course_list[2].course_title, course_list[2].course_num, course_list[2].description, course_list[2].prereqs, course_list[2].hours
     expect(title == title3 && num == num3 && desc == desc3 && prereqs == prereq3 && hours == hours3).to be_truthy
 
+  end
+
+  it 'gets all section attributes from 1 classes' do
+    section_raw_test = '"classNumber":"24868","section":"0005","component":"Lecture","instructionMode":"In Person","meetings":[{"meetingNumber":1,"facilityId":"DL0357","facilityType":"1B","facilityDescription":"Dreese Laboratories","facilityDescriptionShort":"Dreese Lab","facilityGroup":false,"facilityCapacity":46,"buildingCode":"279","room":"357","buildingDescription":"Dreese Lab 357","buildingDescriptionShort":"DL 357","startTime":"8:00 am","endTime":"8:55 am","startDate":"2022-01-10","endDate":"2022-04-25","monday":false,"tuesday":true,"wednesday":false,"thursday":true,"friday":false,"saturday":false,"sunday":false,"standingMeetingPattern":null,"instructors":[{"displayName":"Veronica Sarah Thai","role":"PI","email":"thai.53@osu.edu"}]}],"courseOfferingNumber":1,"courseId":"150505","academicGroup":"ENG","subject":"Computer Science & Engineering","catalogNumber":"2221","career":"UGRD","description":"SW 1: Components","enrollmentStatus":"Open","status":"A","type":"E","associatedClass":"5","autoEnrollWaitlist":true,"autoEnrollSection1":"0006","autoEnrollSection2":null,"consent":false,"waitlistCapacity":999,"minimumEnrollment":0,"enrollmentTotal":39,"waitlistTotal":0,"academicOrg":"D1435","location":"CS-COLMBUS","equivalentCourseId":null,"startDate":"2022-01-10","endDate":"2022-04-25","cancelDate":null,"primaryInstructorSection":"0005","combinedSection":null,"holidaySchedule":"OSUSIS","sessionCode":"1","sessionDescription":"Regular Academic Term","term":"Spring 2022","campus":"Columbus","attributes":[{"name":"CCP","value":"LEVEL 1","description":"Level 1 CCP course"},{"name":"EXAM","value":"DEPT","description":"EM test administered by department of instruction"}],"secCampus":"COL","secAcademicGroup":"ENG","secCatalogNumber":"2221","meetingDays":"","_parent":"150505-1-1222","subjectDesc":"Computer Science & Engineering","courseTitle":"Software I: Software Components","courseDescription":"Intellectual foundations of software engineering; design-by-contract principles; mathematical modeling of software functionality; component-based software from client perspective; layered data representation.\nPrereq: 1212, 1221, 1222, 1223, 1224, Engr 1221, 1281.01H, 1281.02H, or CSE Placement Level A. Prereq or concur: Math 1151, 1161.01, or 1161.02. Not open to students with credit for 5022. This course is available for EM credit.","catalogLevel":"2xxx","termCode"'
+    test_list = [section_raw_test]
+    expected = Section.new "0005", "Spring 2022", "In Person", "Columbus","Dreese Lab",
+                           "357", "Tu Th ", "8:00 am", "8:55 am"
+    section_list = Serializer.serialize_sections test_list
+    puts section_list[0].title.to_s
+    puts expected.title.to_s
+
+    expect(expected.section_num == section_list[0].section_num.to_s &&
+             expected.term == section_list[0].term.to_s &&
+             expected.mode == section_list[0].mode.to_s &&
+             expected.city == section_list[0].city.to_s &&
+             expected.building == section_list[0].building.to_s &&
+             expected.room == section_list[0].room.to_s &&
+             expected.days == section_list[0].days.to_s &&
+             expected.start_time == section_list[0].start_time.to_s &&
+             expected.end_time == section_list[0].end_time.to_s &&
+             expected.title == section_list[0].title.to_s).to be_truthy
+
+  end
+
+  it 'gets all section attributes from 2 classes' do
+    section_raw_test1 = '"classNumber":"24868","section":"0005","component":"Lecture","instructionMode":"In Person","meetings":[{"meetingNumber":1,"facilityId":"DL0357","facilityType":"1B","facilityDescription":"Dreese Laboratories","facilityDescriptionShort":"Dreese Lab","facilityGroup":false,"facilityCapacity":46,"buildingCode":"279","room":"357","buildingDescription":"Dreese Lab 357","buildingDescriptionShort":"DL 357","startTime":"8:00 am","endTime":"8:55 am","startDate":"2022-01-10","endDate":"2022-04-25","monday":false,"tuesday":true,"wednesday":false,"thursday":true,"friday":false,"saturday":false,"sunday":false,"standingMeetingPattern":null,"instructors":[{"displayName":"Veronica Sarah Thai","role":"PI","email":"thai.53@osu.edu"}]}],"courseOfferingNumber":1,"courseId":"150505","academicGroup":"ENG","subject":"Computer Science & Engineering","catalogNumber":"2221","career":"UGRD","description":"SW 1: Components","enrollmentStatus":"Open","status":"A","type":"E","associatedClass":"5","autoEnrollWaitlist":true,"autoEnrollSection1":"0006","autoEnrollSection2":null,"consent":false,"waitlistCapacity":999,"minimumEnrollment":0,"enrollmentTotal":39,"waitlistTotal":0,"academicOrg":"D1435","location":"CS-COLMBUS","equivalentCourseId":null,"startDate":"2022-01-10","endDate":"2022-04-25","cancelDate":null,"primaryInstructorSection":"0005","combinedSection":null,"holidaySchedule":"OSUSIS","sessionCode":"1","sessionDescription":"Regular Academic Term","term":"Spring 2022","campus":"Columbus","attributes":[{"name":"CCP","value":"LEVEL 1","description":"Level 1 CCP course"},{"name":"EXAM","value":"DEPT","description":"EM test administered by department of instruction"}],"secCampus":"COL","secAcademicGroup":"ENG","secCatalogNumber":"2221","meetingDays":"","_parent":"150505-1-1222","subjectDesc":"Computer Science & Engineering","courseTitle":"Software I: Software Components","courseDescription":"Intellectual foundations of software engineering; design-by-contract principles; mathematical modeling of software functionality; component-based software from client perspective; layered data representation.\nPrereq: 1212, 1221, 1222, 1223, 1224, Engr 1221, 1281.01H, 1281.02H, or CSE Placement Level A. Prereq or concur: Math 1151, 1161.01, or 1161.02. Not open to students with credit for 5022. This course is available for EM credit.","catalogLevel":"2xxx","termCode"'
+    section_raw_test2 = '"classNumber":"24868","section":"0010","component":"Lecture","instructionMode":"Online","meetings":[{"meetingNumber":1,"facilityId":"DL0357","facilityType":"1B","facilityDescription":"Dreese Laboratories","facilityDescriptionShort":"Dreese Lab","facilityGroup":false,"facilityCapacity":46,"buildingCode":"279","room":"420","buildingDescription":"Scott lab 357","buildingDescriptionShort":"DL 357","startTime":"10:00 am","endTime":"12:55 pm","startDate":"2022-01-10","endDate":"2022-04-25","monday":true,"tuesday":true,"wednesday":true,"thursday":true,"friday":true,"saturday":false,"sunday":false,"standingMeetingPattern":null,"instructors":[{"displayName":"Veronica Sarah Thai","role":"PI","email":"thai.53@osu.edu"}]}],"courseOfferingNumber":1,"courseId":"150505","academicGroup":"ENG","subject":"Computer Science & Engineering","catalogNumber":"2221","career":"UGRD","description":"SW 1: Components","enrollmentStatus":"Open","status":"A","type":"E","associatedClass":"5","autoEnrollWaitlist":true,"autoEnrollSection1":"0006","autoEnrollSection2":null,"consent":false,"waitlistCapacity":999,"minimumEnrollment":0,"enrollmentTotal":39,"waitlistTotal":0,"academicOrg":"D1435","location":"CS-COLMBUS","equivalentCourseId":null,"startDate":"2022-01-10","endDate":"2022-04-25","cancelDate":null,"primaryInstructorSection":"0005","combinedSection":null,"holidaySchedule":"OSUSIS","sessionCode":"1","sessionDescription":"Regular Academic Term","term":"Fall 2022","campus":"Newark","attributes":[{"name":"CCP","value":"LEVEL 1","description":"Level 1 CCP course"},{"name":"EXAM","value":"DEPT","description":"EM test administered by department of instruction"}],"secCampus":"COL","secAcademicGroup":"ENG","secCatalogNumber":"2221","meetingDays":"","_parent":"150505-1-1222","subjectDesc":"Computer Science & Engineering","courseTitle":"Software I: Software Components","courseDescription":"Intellectual foundations of software engineering; design-by-contract principles; mathematical modeling of software functionality; component-based software from client perspective; layered data representation.\nPrereq: 1212, 1221, 1222, 1223, 1224, Engr 1221, 1281.01H, 1281.02H, or CSE Placement Level A. Prereq or concur: Math 1151, 1161.01, or 1161.02. Not open to students with credit for 5022. This course is available for EM credit.","catalogLevel":"2xxx","termCode"'
+    test_list = [section_raw_test2, section_raw_test1]
+    expected = Array.new
+    expected[0] = Section.new "0005", "Spring 2022", "In Person", "Columbus","Dreese Lab",
+                           "357", "Tu Th ", "8:00 am", "8:55 am"
+    expected[1] = Section.new "0010", "Fall 2022", "Online", "Newark","Scott lab",
+                              "420", "M Tu W Th F ", "10:00 am", "12:55 pm"
+    section_list = Serializer.serialize_sections test_list
+
+    expect(expected[0].section_num == section_list[0].section_num.to_s &&
+             expected[0].term == section_list[0].term.to_s &&
+             expected[0].mode == section_list[0].mode.to_s &&
+             expected[0].city == section_list[0].city.to_s &&
+             expected[0].building == section_list[0].building.to_s &&
+             expected[0].room == section_list[0].room.to_s &&
+             expected[0].days == section_list[0].days.to_s &&
+             expected[0].start_time == section_list[0].start_time.to_s &&
+             expected[0].end_time == section_list[0].end_time.to_s &&
+             expected[0].title == section_list[0].title.to_s).to be_truthy
+
+    expect(expected[1].section_num == section_list[1].section_num.to_s &&
+             expected[1].term == section_list[1].term.to_s &&
+             expected[1].mode == section_list[1].mode.to_s &&
+             expected[1].city == section_list[1].city.to_s &&
+             expected[1].building == section_list[1].building.to_s &&
+             expected[1].room == section_list[1].room.to_s &&
+             expected[1].days == section_list[1].days.to_s &&
+             expected[1].start_time == section_list[1].start_time.to_s &&
+             expected[1].end_time == section_list[1].end_time.to_s &&
+             expected[1].title == section_list[1].title.to_s).to be_truthy
   end
 
 end

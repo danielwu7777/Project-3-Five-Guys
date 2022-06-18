@@ -12,6 +12,18 @@ class Regex_Factory
   Serializer_course_prereq_regex = /(?<=Prereq: ).*?(?= <)/
   Serializer_course_hours_regex = /(?<=Units:<\/span> ).*?(?=<)/
 
+  Serializer_section_secnum_regex = /(?<=\"section\":").*?(?=")/
+  Serializer_section_term_regex = /(?<=\"term\":").*?(?=")/
+  Serializer_section_mode_regex = /(?<=\"instructionMode\":").*?(?=")/
+  Serializer_section_city_regex = /(?<=\"campus\":").*?(?=")/
+  Serializer_section_building_regex = /(?<=\"buildingDescription\":").*?(?= \d+")/
+  Serializer_section_room_regex = /(?<=\"room\":").*?(?=")/
+  Serializer_section_days_regex = /"monday.*?(?="standing)/
+  Serializer_section_start_regex = /(?<=\"startTime\":").*?(?=")/
+  Serializer_section_end_regex = /(?<=\"endTime\":").*?(?=")/
+  Serializer_section_title_regex = /(?<=\"courseTitle\":").*?(?=")/
+
+
   Section_start_regex = "\"classNumber\".*?"
   Section_end_regex = "\"termCode\""
 
