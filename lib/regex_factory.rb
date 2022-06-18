@@ -22,11 +22,11 @@ class Regex_Factory
     filter_parameters.each do |key, value|
       case key
         when "sec_num"
-            regExpString += "(\"section\":\"#{value}\").*?"
+            regExpString += "\"section\":\"#{value}\".*?"
         when "mode"
             regExpString += "\"instructionMode\":\"#{value}\".*?"
         when "building"
-            regExpString += "\"instructionMode\":\"In Person\".*?\"facilityDescription\":\"#{value}\".*?"
+            regExpString += "\"facilityDescription\":\"#{value}\".*?"
         when "room"
             regExpString += "\"room\":\"#{value}\".*?"
         when "start_time"

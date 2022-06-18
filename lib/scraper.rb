@@ -17,10 +17,9 @@ class Scraper
   end
 
   # Created 6/17/2022 by Noah Moon
+  # Edited 6/18/2022 by Noah Moon
   def self.scrape_sections(filter_as_regex, html_to_scrape)
-    array = Array.new
-    #html_to_scrape.scan(/(?<={)"classNumber".*?(?="termCode")/) { |match|  array.push match}
-    html_to_scrape.scan(filter_as_regex) { |match|  array.push match}
+   html_to_scrape.scan(/(?<={)"classNumber".*?"termCode"/).select{|section| section.to_s.match? filter_as_regex}
   end
 
   private
