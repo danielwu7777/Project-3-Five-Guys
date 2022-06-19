@@ -179,15 +179,14 @@ describe 'Regex_Factory' do
     it 'filter section by building' do
       filterHash = {"building" => "DREESE"}
       result = Regex_Factory.convert_section_filter_to_regex filterHash
-      expected = Regexp.new "\"classNumber\".*?\"facilityDescription\":\"DREESE\".*?\"termCode\""
+      expected = Regexp.new "\"classNumber\".*?\"facilityDescriptionShort\":\"DREESE\".*?\"termCode\""
       expect(result.to_s == expected.to_s).to be_truthy
     end
     it 'filter section by all filters' do
       filterHash = {"sec_num" => "0005", "mode" => "In Person", "building" => "Dreese Laboratories", "room" => "357","start_time" => "8:00 am",
       "end_time" => "8:55 am", "term" => "Spring 2022", "city" => "Columbus"}
       result = Regex_Factory.convert_section_filter_to_regex filterHash
-      expected = /"classNumber".*?"section":"0005".*?"instructionMode":"In Person","meetings".*?"facilityDescription":"Dreese Laboratories".*?"room":"357".*?"startTime":"8:00 am".*?"endTime":"8:55 am".*?"term":"Spring 2022".*?"campus":"Columbus".*?"termCode"/
-      puts result.to_s
+      expected = /"classNumber".*?"section":"0005".*?"instructionMode":"In Person","meetings".*?"facilityDescriptionShort":"Dreese Laboratories".*?"room":"357".*?"startTime":"8:00 am".*?"endTime":"8:55 am".*?"term":"Spring 2022".*?"campus":"Columbus".*?"termCode"/
       expect(result.to_s == expected.to_s).to be_truthy
     end
 end

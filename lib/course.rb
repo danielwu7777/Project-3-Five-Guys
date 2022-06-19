@@ -3,7 +3,6 @@
 # File edited 6/11/2022 by Noah Moon
 # Edited 6/16/2022 by Yuhao Yan: parentheses removed
 
-
 class Course
   attr_reader :course_num, :course_title, :description, :prereqs, :hours
 

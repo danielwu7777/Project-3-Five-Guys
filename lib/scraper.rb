@@ -2,14 +2,15 @@
 # Edited 6/11/2022 by Jake McCann
 # Edited 6/16/2022 by Yuhao Yan: parentheses removed
 # Edited 6/17/2022 by Noah Moon
+# Edited 6/19/2022 by Noah Moon
 require 'nokogiri'
 
 class Scraper
   # Created 6/8/2022 by Jake McCann
   # Edited 6/11/2022 by Jake McCann
+  # # Edited 6/18/2022 by Jake McCann
   # filter_as_regex: regex representation of user filter parameters
   # html_to_scrape: html representation of page to be scraped
-
   def self.scrape_courses filter_as_regex, html_to_scrape
     #get sections of html_to_scrape that follow filter_as_regex
     filter_as_regex = /.*/ if filter_as_regex == nil

@@ -26,6 +26,7 @@ class Deserializer
 
       head_print htm_file, title
       body_print htm_file, sections, title
+      system "clear"
       puts "#{htm_file.path} successfully created"
     else
       puts "Unable to open file!"
@@ -49,6 +50,7 @@ class Deserializer
 
       head_print htm_file, title
       body_print_courses htm_file, courses
+      system "clear"
       puts "#{htm_file.path} successfully created"
     else
       puts "Unable to open file!"

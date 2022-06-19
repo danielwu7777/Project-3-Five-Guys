@@ -49,8 +49,6 @@ describe 'Scraper' do
     regex = /class=['|"]number['|"]>\(1110\)<\/span>.*?.*/
 
     result = Scraper.scrape_courses(regex, IO.read("#{__dir__}/example_html/courses_list_real.html"))
-
-    puts result.to_s
     expect(result == expected).to be_truthy
   end
 
@@ -68,8 +66,6 @@ describe 'Scraper' do
     regex = /class=['|"]number['|"]>\(1111\)<\/span>.*?.*/
 
     result = Scraper.scrape_courses(regex, IO.read("#{__dir__}/example_html/courses_list_real.html"))
-
-    puts result.to_s
     expect(result == expected).to be_truthy
   end
 

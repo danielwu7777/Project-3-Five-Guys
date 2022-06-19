@@ -1,10 +1,11 @@
 # File created 6/9/2022 by Noah Moon
 # Edited 6/16/2022 by Yuhao Yan: parentheses removed
-
+# Edited 6/19/2022 by Noah Moon
 class Section
   attr_reader :section_num,:term,:mode,:city,:building,:room,:days,:start_time, :end_time
 
 =begin
+
 course_title = String - name of course. optional after next instance
 section_num = String - course catelog number. Ex. for cse3901, class_num = 3901
 term = String - spring, summer, or fall
@@ -22,6 +23,7 @@ start_time = String - range of class start_time
       term, mode, city, building, room_num, days_of_week, start_time, end_time
     @@course_title = course_title if course_title != nil
   end
+
   #returns title, necessary because attr_reader does not work for class vars
   # Created 6/9/2022 by Noah Moon
   def title
