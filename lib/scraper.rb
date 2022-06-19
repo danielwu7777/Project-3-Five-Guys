@@ -12,13 +12,16 @@ class Scraper
 
   def self.scrape_courses filter_as_regex, html_to_scrape
     #get sections of html_to_scrape that follow filter_as_regex
-    scrape_all_courses html_to_scrape
+    filter_as_regex = /.*/ if filter_as_regex == nil
+    array = scrape_all_courses html_to_scrape
+    array.select { |course| course.to_s.match? filter_as_regex }
     #Once filtering is implemented, the array above can be searched through with filter_as_regex
   end
 
   # Created 6/17/2022 by Noah Moon
   # Edited 6/18/2022 by Noah Moon
   def self.scrape_sections(filter_as_regex, html_to_scrape)
+    filter_as_regex = /.*/ if filter_as_regex == nil
    html_to_scrape.scan(/(?<={)"classNumber".*?"termCode"/).select{|section| section.to_s.match? filter_as_regex}
   end
 

@@ -26,8 +26,7 @@ class Course_Section_Factory
   # Edited 6/10/2022 by Noah Moon
   def sections filter_parameters, course_num
     # fetches and print html page of sections
-    Serializer.serialize_sections Scraper.scrape_sections filter_parameters, @web.sections_html(course_num)
+    Serializer.serialize_sections(Scraper.scrape_sections(filter_parameters, @web.sections_html(course_num)))
   end
-
 
 end

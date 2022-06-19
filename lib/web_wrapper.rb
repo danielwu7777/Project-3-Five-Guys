@@ -27,13 +27,3 @@ class Web_Wrapper
     end
 
 end
-
-#=begin
-file = File.new "./test.txt", "w"
-web = Web_Wrapper.new
-x =  web.sections_html 2221
-array = Array.new
-x.scan(/(?<={)"classNumber".*?(?="termCode")/) { |match|  array.push match}
-puts array[1].to_s
-#=end
-

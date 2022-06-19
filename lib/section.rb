@@ -18,20 +18,20 @@ start_time = String - range of class start_time
 =end
   # Created 6/9/2022 by Noah Moon
   def initialize section_num, term, mode, city, building, room_num, days_of_week, start_time, end_time, course_title = nil
-    @section_num = section_num
-    @term = term
-    @mode = mode
-    @city = city
-    @building = building
-    @room = room_num
-    @days = days_of_week
-    @start_time = start_time
-    @end_time = end_time
+    @section_num, @term, @mode, @city, @building, @room, @days, @start_time, @end_time = section_num,
+      term, mode, city, building, room_num, days_of_week, start_time, end_time
     @@course_title = course_title if course_title != nil
   end
   #returns title, necessary because attr_reader does not work for class vars
   # Created 6/9/2022 by Noah Moon
   def title
     @@course_title
+  end
+
+  #Created 6/11/2022 by Noah Moon
+  def to_s
+    "Course Title: #{@@course_title}\nSection Number: #{@section_num}\nterm: #{@term}\nmode: #{@mode}"\
+    "\ncity: #{@city}\nBuilding: #{@building}\nRoom: #{@room}\nDays: #{@days}\nStart Time: #{@start_time}"\
+    "\nEnd Time: #{@end_time}"
   end
 end
