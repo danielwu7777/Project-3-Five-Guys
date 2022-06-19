@@ -1,4 +1,5 @@
 require_relative '../lib/course'
+require_relative '../lib/section'
 require_relative '../lib/regex_factory'
 # Created 6/9/2022 by Jake McCann
 # Edited 6/10/2022 by Noah Moon
@@ -27,10 +28,10 @@ class Serializer
   # Created 6/9/2022 by Jake McCann
   # Edited 6/10/2022 by Noah Moon : made class method
   # sections_html: array of HTML sections where each element describes an entire section
-  def self.serialize_sections sections_string_array
+  def self.serialize_sections sections_array
     # Convert sections_html into array of sections
     section_list = Array.new
-    sections_string_array.each do |section_string|
+    sections_array.each do |section_string|
       section_list.unshift Section.new section_string.match(Regex_Factory::Serializer_section_secnum_regex).to_s,
                                        section_string.match(Regex_Factory::Serializer_section_term_regex).to_s,
                                        section_string.match(Regex_Factory::Serializer_section_mode_regex).to_s,
