@@ -15,9 +15,9 @@ class Regex_Factory
 
   Serializer_section_secnum_regex = /(?<=\"section\":").*?(?=")/
   Serializer_section_term_regex = /(?<=\"term\":").*?(?=")/
-  Serializer_section_mode_regex = /(?<=\"instructionMode\":").*?(?=")/
+  Serializer_section_mode_regex = /(?<=\"instructionMode\":").*?(?=,"meetings)/
   Serializer_section_city_regex = /(?<=\"campus\":").*?(?=")/
-  Serializer_section_building_regex = /(?<=\"buildingDescription\":").*?(?= \d+")/
+  Serializer_section_building_regex = /(?<=\"buildingDescription\":").*?(?= \d*","buildingDescriptionShort)/
   Serializer_section_room_regex = /(?<=\"room\":").*?(?=")/
   Serializer_section_days_regex = /"monday.*?(?="standing)/
   Serializer_section_start_regex = /(?<=\"startTime\":").*?(?=")/
@@ -30,6 +30,7 @@ class Regex_Factory
 
   # Created 6/17/2022 by Noah Moon
   def self.convert_section_filter_to_regex filter_parameters
+    return if filter_parameters == nil
     regExpString = Section_start_regex
     # Counter to know when at the last key-val pair in hash
     filter_parameters.each do |key, value|
@@ -37,9 +38,9 @@ class Regex_Factory
         when "sec_num"
             regExpString += "\"section\":\"#{value}\".*?"
         when "mode"
-            regExpString += "\"instructionMode\":\"#{value}\".*?"
+            regExpString += "\"instructionMode\":\"#{value}\",\"meetings\".*?"
         when "building"
-            regExpString += "\"facilityDescription\":\"#{value}\".*?"
+            regExpString += "\"facilityDescriptionShort\":\"#{value}\".*?"
         when "room"
             regExpString += "\"room\":\"#{value}\".*?"
         when "start_time"
@@ -64,6 +65,7 @@ class Regex_Factory
   # Edited 6/18/2022 by Noah Moon
   # filter_parameters: hash containing key-val pairs describing how user wants courses filtered
   def self.convert_course_filter_to_regex filter_parameters
+    return if filter_parameters == nil
     regExpString = ""
     filter_parameters.each do |key, value|
       case key
@@ -87,13 +89,20 @@ class Regex_Factory
   Regex expression constants
 =end
   FILE_REGEX = /^(\/[a-z_\-\s0-9\.]+)*\w+\.html|\n/
-  MAIN_OPTIONS_REGEX = Regexp.union %w[0 1]
+  MAIN_OPTIONS_REGEX = Regexp.union %w[0 1 2]
   COURSE_OPTIONS_REGEX = Regexp.union %w[0 1 2]
-  COURSE_NUM_REGEX = /\A\d{1,4}\Z|\n/
-  COURSE_TITLE_REGEX = /[A-Za-z0-9]|\n/
-  COURSE_DESC_REGEX = /[A-Za-z0-9]|\n/
-  COURSE_PRE_REGEX = /[A-Za-z0-9]|\n/
-  COURSE_HOURS_REGEX = /\b[1-6]\b|\n/
+  COURSE_NUM_REGEX = /\d\d\d\d|^$/
+  COURSE_TITLE_REGEX = /[A-Za-z0-9]|^$/
+  COURSE_DESC_REGEX = /[A-Za-z0-9]|^$/
+  COURSE_PRE_REGEX = /\d\d\d\d|^$/
+  COURSE_HOURS_REGEX = /\b[1-6]\b|^$/
+  SECTION_MODE_REGEX = /[0|1|]|^$/
+  SECTION_TERM_REGEX = /[0|1||2]|^$/
+  SECTION_LOCATION_REGEX = /[0-5]|^$/
+  SECTION_BUILDING_REGEX = /[A-Za-z|\s]|^$/
+  SECTION_ROOM_REGEX = /\d.*?|^$/
+  SECTION_TIME_REGEX = /\d{1,2}:\d{2} (am|pm)|^$/
+  SECTION_DAYS_REGEX = /[M|Tu|W|Th|F|Sa|Su].*{1,7}|^$/
 
 
 end

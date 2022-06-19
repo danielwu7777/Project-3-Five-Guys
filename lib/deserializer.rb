@@ -26,7 +26,7 @@ class Deserializer
 
       head_print htm_file, title
       body_print htm_file, sections, title
-
+      puts "#{htm_file.path} successfully created"
     else
       puts "Unable to open file!"
     end
@@ -36,6 +36,7 @@ class Deserializer
 
   # Created 6/13/2022 by Noah Moon
   # Edited 6/16/2022 by Yuhao Yan
+  # Edited 6/18/2022 by Noah Moon
   def self.print_courses_file courses, path
     # Open the HTML output file
     htm_file = File.new path, "w"
@@ -48,7 +49,7 @@ class Deserializer
 
       head_print htm_file, title
       body_print_courses htm_file, courses
-
+      puts "#{htm_file.path} successfully created"
     else
       puts "Unable to open file!"
     end

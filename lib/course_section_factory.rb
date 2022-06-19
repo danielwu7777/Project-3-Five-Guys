@@ -4,21 +4,26 @@
 require_relative 'web_wrapper'
 require_relative 'serializer'
 require_relative 'scraper'
+require_relative 'regex_factory'
 
 class Course_Section_Factory
+  attr_reader :courses_selected, :sections_selected
+  attr_accessor :course_num
+
 
   # Created 6/9/2022 by Jake McCann
   # Edited 6/10/2022 by Noah Moon
   def initialize
     #Create web wrapper
     @web = Web_Wrapper.new
+    @course_num = nil
   end
 
   # Created 6/9/2022 by Jake McCann
   # Edited 6/10/2022 by Noah Moon
   def courses filter_parameters
     # fetches and print html page of sections
-    Serializer.serialize_courses Scraper.scrape_courses filter_parameters, @web.courses_html
+    @courses_selected = Serializer.serialize_courses Scraper.scrape_courses(Regex_Factory.convert_course_filter_to_regex(filter_parameters), @web.courses_html)
   end
 
   # Created 6/9/2022 by Jake McCann
@@ -26,7 +31,8 @@ class Course_Section_Factory
   # Edited 6/10/2022 by Noah Moon
   def sections filter_parameters, course_num
     # fetches and print html page of sections
-    Serializer.serialize_sections(Scraper.scrape_sections(filter_parameters, @web.sections_html(course_num)))
+    @course_num = course_num if course_num != nil
+    @sections_selected = Serializer.serialize_sections Scraper.scrape_sections(Regex_Factory.convert_section_filter_to_regex(filter_parameters), @web.sections_html(@course_num))
   end
 
 end
