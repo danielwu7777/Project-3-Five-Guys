@@ -132,29 +132,10 @@ describe 'Regex_Factory' do
     end
 
     # Created 6/14/2022 by Jake McCann
-    it 'accepts course number with one digit' do
-      (1...9).each { |num| expect(Regex_Factory::COURSE_NUM_REGEX.match?(num.to_s)).to be_truthy }
-    end
-
-    # Created 6/14/2022 by Jake McCann
-    it 'accepts course number with two digits' do
-      [11,22,33,44,55,66].each { |num| expect(Regex_Factory::COURSE_NUM_REGEX.match?(num.to_s)).to be_truthy }
-    end
-
-    # Created 6/14/2022 by Jake McCann
-    it 'accepts course number with three digits' do
-      [111,222,333,444,555,666].each { |num| expect(Regex_Factory::COURSE_NUM_REGEX.match?(num.to_s)).to be_truthy }
-    end
-
-    # Created 6/14/2022 by Jake McCann
     it 'accepts course number with four digits' do
       [1111,2222,3333,4444,5555,6666].each { |num| expect(Regex_Factory::COURSE_NUM_REGEX.match?(num.to_s)).to be_truthy }
     end
 
-    # Created 6/14/2022 by Jake McCann
-    it 'rejects course number with five digits' do
-      [11111,22222,33333,44444,55555,66666].each { |num| expect(Regex_Factory::COURSE_NUM_REGEX.match?(num.to_s)).to be_falsey }
-    end
 
     # Created 6/14/2022 by Jake McCann
     it 'accepts empty course num' do
@@ -191,7 +172,7 @@ describe 'Regex_Factory' do
     it 'filter section by mode' do
       filterHash = {"mode" => "In Person"}
       result = Regex_Factory.convert_section_filter_to_regex filterHash
-      expected = Regexp.new "\"classNumber\".*?\"instructionMode\":\"In Person\".*?\"termCode\""
+      expected = Regexp.new "\"classNumber\".*?\"instructionMode\":\"In Person\",\"meetings\".*?\"termCode\""
       expect(result.to_s == expected.to_s).to be_truthy
     end
 
@@ -205,7 +186,8 @@ describe 'Regex_Factory' do
       filterHash = {"sec_num" => "0005", "mode" => "In Person", "building" => "Dreese Laboratories", "room" => "357","start_time" => "8:00 am",
       "end_time" => "8:55 am", "term" => "Spring 2022", "city" => "Columbus"}
       result = Regex_Factory.convert_section_filter_to_regex filterHash
-      expected = Regexp.new "\"classNumber\".*?\"section\":\"0005\".*?\"instructionMode\":\"In Person\".*?\"facilityDescription\":\"Dreese Laboratories\".*?\"room\":\"357\".*?\"startTime\":\"8:00 am\".*?\"endTime\":\"8:55 am\".*?\"term\":\"Spring 2022\".*?\"campus\":\"Columbus\".*?\"termCode\""
+      expected = /"classNumber".*?"section":"0005".*?"instructionMode":"In Person","meetings".*?"facilityDescription":"Dreese Laboratories".*?"room":"357".*?"startTime":"8:00 am".*?"endTime":"8:55 am".*?"term":"Spring 2022".*?"campus":"Columbus".*?"termCode"/
+      puts result.to_s
       expect(result.to_s == expected.to_s).to be_truthy
     end
 end
