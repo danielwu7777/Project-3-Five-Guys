@@ -1,6 +1,7 @@
 #File created 6/9/2022 by Jake McCann
 # File Edited 6/10/2022 by Noah Moon
 # Edited 6/16/2022 by Yuhao Yan: parentheses removed
+# Edited 6/18/2022 by Noah Moon
 require_relative 'web_wrapper'
 require_relative 'serializer'
 require_relative 'scraper'
@@ -10,9 +11,8 @@ class Course_Section_Factory
   attr_reader :courses_selected, :sections_selected
   attr_accessor :course_num
 
-
   # Created 6/9/2022 by Jake McCann
-  # Edited 6/10/2022 by Noah Moon
+  # Edited 6/18/2022 by Noah Moon
   def initialize
     #Create web wrapper
     @web = Web_Wrapper.new
@@ -21,6 +21,7 @@ class Course_Section_Factory
 
   # Created 6/9/2022 by Jake McCann
   # Edited 6/10/2022 by Noah Moon
+  # Edited 6/18/2022 by Noah Moon
   def courses filter_parameters
     # fetches and print html page of sections
     @courses_selected = Serializer.serialize_courses Scraper.scrape_courses(Regex_Factory.convert_course_filter_to_regex(filter_parameters), @web.courses_html)
@@ -28,7 +29,7 @@ class Course_Section_Factory
 
   # Created 6/9/2022 by Jake McCann
   # Edited 6/10/2022 by Noah Moon
-  # Edited 6/10/2022 by Noah Moon
+  # Edited 6/18/2022 by Noah Moon
   def sections filter_parameters, course_num
     # fetches and print html page of sections
     @course_num = course_num if course_num != nil

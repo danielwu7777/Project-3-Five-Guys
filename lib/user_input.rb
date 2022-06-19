@@ -7,12 +7,8 @@ require_relative 'utility'
 require_relative 'safe_input'
 require_relative 'deserializer'
 require_relative 'regex_factory'
-require 'launchy'
 
 class User_Input
-    MODE_ENUM = ["In Person", "Distance Learning"]
-    TERM_ENUM = ["Spring 2022", "Autumn 2022", "Summer 2022"]
-    CAMPUS_ENUM = %w[Columbus Lima Mansfield Marion Newark Wooster]
 
     # Created 6/8/2022 by Daniel Wu
     # Edited 6/11/2022 by Jake McCann: factory now created
@@ -21,6 +17,7 @@ class User_Input
     end
 
     # Created 6/11/2022 by Jake McCann
+    # Edited 6/19/2022 by Noah Moon
     # Prompts user and gets input
     def main_io
         system "clear"
@@ -39,6 +36,7 @@ class User_Input
 
     # Created 6/11/2022 by Jake McCann
     # Edited 6/13/2022 by Noah Moon
+    # Edited 6/19/2022 by Noah Moon
     def courses_io filter_hash
         system "clear"
         @data_factory.courses(filter_hash).each{|course| puts(Utility.wrap_string "\n#{course.to_s}", 90)}
@@ -55,12 +53,13 @@ class User_Input
     end
 
     # Created by Noah Moon 6/18/2022
+    # Edited 6/19/2022 by Noah Moon
     def section_io filter_hash
         system "clear"
         course_num = nil
         if @data_factory.course_num == nil
             print "Enter the 4-digit class number whose sections you would like to view: "
-            course_num = Safe_Input.safe_input(Regex_Factory::COURSE_NUM_REGEX) {puts COURSE_NUM_ERRMSG}
+            course_num = Safe_Input.safe_input(Regex_Factory::SECTION_NUM_REGEX) {puts SECTION_NUM_ERRMSG}
         end
 
         system "clear"
@@ -116,6 +115,7 @@ class User_Input
 
     # Created 6/18/2022 by Noah Moon
     def section_filter_io
+        system "clear"
         filter_hash = Hash.new
         menu_template {filter_menu}
         print"Section Number filter: "
@@ -128,7 +128,7 @@ class User_Input
         input = Safe_Input.safe_input(Regex_Factory::SECTION_BUILDING_REGEX) {puts SECTION_BUILDING_ERRMSG}
         filter_hash["building"] = input if input != ""
         print "Room Number: "
-        input = Safe_Input.safe_input(Regex_Factory::SECTION_ROOM_REGEX) {puts SECTION_BUILDING_ERRMSG}
+        input = Safe_Input.safe_input(Regex_Factory::SECTION_ROOM_REGEX) {puts SECTION_ROOM_ERRMSG}
         filter_hash["room"] = input if input != ""
         print "Start Time(h:mm am/pm): "
         input = Safe_Input.safe_input(Regex_Factory::SECTION_TIME_REGEX) {puts SECTION_START_TIME_ERRMSG}
@@ -136,9 +136,9 @@ class User_Input
         print "End Time(h:mm am/pm): "
         input = Safe_Input.safe_input(Regex_Factory::SECTION_TIME_REGEX) {puts SECTION_END_TIME_ERRMSG}
         filter_hash["end_time"] = input if input != ""
-        print "Days(ex. 'M W F'): "
+        print "Days(ex. 'M Tu W Th'): "
         input = Safe_Input.safe_input(Regex_Factory::SECTION_DAYS_REGEX) {puts COURSE_HOURS_ERRMSG}
-        filter_hash["days"] = input if input != ""
+        filter_hash["days"] = Serializer.days_to_raw input if input != ""
         term_menu
         input = Safe_Input.safe_input(Regex_Factory::SECTION_TERM_REGEX) {puts COURSE_HOURS_ERRMSG}
         filter_hash["term"] = TERM_ENUM[input.to_i] if input != ""
@@ -150,6 +150,7 @@ class User_Input
     end
     private
     # Created 6/14/2022 by Jake McCann
+    # Edited 6/19/2022 by Noah Moon
     def menu_template
         puts MENU_BORDER
         puts "\n"
@@ -161,6 +162,7 @@ class User_Input
     Menus
 =end
     # Created 6/11/2022 by Jake McCann
+    # Edited 6/19/2022 by Noah Moon
     def main_menu
         puts "Welcome to the course navigator"
         puts "\nEnter the number of what you want to do."
@@ -177,7 +179,7 @@ class User_Input
         puts "[1] Print current displayed courses to HTML"
         puts "[0] Return to main menu"
     end
-
+    # Created 6/19/2022 by Noah Moon
     def section_menu
         puts "All found sections are listed above"
         puts "\nEnter the number of what you want to do."
@@ -189,7 +191,6 @@ class User_Input
     #Created 6/14/2022 by Jake McCann
     def file_menu
         puts "Enter valid file name or path ending in .html"
-        puts "[0] Return to main menu"
     end
 
     #Created 6/14/2022 by Jake McCann
@@ -241,7 +242,13 @@ class User_Input
     SECTION_NUM_ERRMSG = "Invalid filter value for section number, try again"
     SECTION_MODE_ERRMSG = "Invalid filter value for mode, try again"
     SECTION_BUILDING_ERRMSG = "Invalid filter value for building, try again"
-    SECTION_BUILDING_ERRMSG = "Invalid filter value for room, try again"
+    SECTION_ROOM_ERRMSG = "Invalid filter value for room, try again"
     SECTION_START_TIME_ERRMSG = "Invalid filter value for start time, try again"
-    SECTION_END_TIME_ERRMSG = "Invalid filter value for start time, try again"
+    SECTION_END_TIME_ERRMSG = "Invalid filter value for end time, try again"
+    SECTION_DAYS_TIME_ERRMSG = "Invalid filter value for days, try again\n accepts values: M Tu W Th F Sa Su"
+    SECTION_TERM_TIME_ERRMSG = "Invalid filter value for term, try again"
+    SECTION_LOCATION_TIME_ERRMSG = "Invalid filter value for location, try again"
+    MODE_ENUM = ["In Person", "Distance Learning"]
+    TERM_ENUM = ["Spring 2022", "Autumn 2022", "Summer 2022"]
+    CAMPUS_ENUM = %w[Columbus Lima Mansfield Marion Newark Wooster]
 end

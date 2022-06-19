@@ -4,6 +4,7 @@ require_relative '../lib/section'
 # File created 6/9/2022 by Jake McCann
 # Edited 6/10/2022 by Noah Moon
 # Edited 6/11/2022 by Noah Moon
+# Edited 6/19/2022 by Noah Moon
 
 test_html1 = "<h4 class='title'><span class='title'>Modeling and Problem Solving with Spreadsheets and Databases for Engineers</span> <span class='number'>(2112)</span></h4><p class='description'><span class='label'>Description:</span> Spreadsheet and database modeling/programming concepts and techniques to solve business and engineering related problems; efficient/effective data handling, computational analysis and decision support.<br />Prereq: 1222, 1223, 1224, Engr 1281.01H, or 1281.02H. Prereq or concur: Math 1151, 1161.01, or 1161.02. Not open to students with credit for 1111, 1112, 1113, or 2111. <span class='label'>Units:</span> 3</p><p class='subject'><span class='label'>Subject: </span>Computer Science and Engineering</p></div>"
 title1 = "Modeling and Problem Solving with Spreadsheets and Databases for Engineers"
@@ -130,10 +131,8 @@ describe 'Serializer' do
     section_raw_test = '"classNumber":"24868","section":"0005","component":"Lecture","instructionMode":"In Person","meetings":[{"meetingNumber":1,"facilityId":"DL0357","facilityType":"1B","facilityDescription":"Dreese Laboratories","facilityDescriptionShort":"Dreese Lab","facilityGroup":false,"facilityCapacity":46,"buildingCode":"279","room":"357","buildingDescription":"Dreese Lab 357","buildingDescriptionShort":"DL 357","startTime":"8:00 am","endTime":"8:55 am","startDate":"2022-01-10","endDate":"2022-04-25","monday":false,"tuesday":true,"wednesday":false,"thursday":true,"friday":false,"saturday":false,"sunday":false,"standingMeetingPattern":null,"instructors":[{"displayName":"Veronica Sarah Thai","role":"PI","email":"thai.53@osu.edu"}]}],"courseOfferingNumber":1,"courseId":"150505","academicGroup":"ENG","subject":"Computer Science & Engineering","catalogNumber":"2221","career":"UGRD","description":"SW 1: Components","enrollmentStatus":"Open","status":"A","type":"E","associatedClass":"5","autoEnrollWaitlist":true,"autoEnrollSection1":"0006","autoEnrollSection2":null,"consent":false,"waitlistCapacity":999,"minimumEnrollment":0,"enrollmentTotal":39,"waitlistTotal":0,"academicOrg":"D1435","location":"CS-COLMBUS","equivalentCourseId":null,"startDate":"2022-01-10","endDate":"2022-04-25","cancelDate":null,"primaryInstructorSection":"0005","combinedSection":null,"holidaySchedule":"OSUSIS","sessionCode":"1","sessionDescription":"Regular Academic Term","term":"Spring 2022","campus":"Columbus","attributes":[{"name":"CCP","value":"LEVEL 1","description":"Level 1 CCP course"},{"name":"EXAM","value":"DEPT","description":"EM test administered by department of instruction"}],"secCampus":"COL","secAcademicGroup":"ENG","secCatalogNumber":"2221","meetingDays":"","_parent":"150505-1-1222","subjectDesc":"Computer Science & Engineering","courseTitle":"Software I: Software Components","courseDescription":"Intellectual foundations of software engineering; design-by-contract principles; mathematical modeling of software functionality; component-based software from client perspective; layered data representation.\nPrereq: 1212, 1221, 1222, 1223, 1224, Engr 1221, 1281.01H, 1281.02H, or CSE Placement Level A. Prereq or concur: Math 1151, 1161.01, or 1161.02. Not open to students with credit for 5022. This course is available for EM credit.","catalogLevel":"2xxx","termCode"'
     test_list = [section_raw_test]
     expected = Section.new "0005", "Spring 2022", "In Person", "Columbus","Dreese Lab",
-                           "357", "Tu Th ", "8:00 am", "8:55 am"
+                           "357", "Tu Th", "8:00 am", "8:55 am"
     section_list = Serializer.serialize_sections test_list
-    puts section_list[0].title.to_s
-    puts expected.title.to_s
 
     expect(expected.section_num == section_list[0].section_num.to_s &&
              expected.term == section_list[0].term.to_s &&
@@ -154,9 +153,9 @@ describe 'Serializer' do
     test_list = [section_raw_test2, section_raw_test1]
     expected = Array.new
     expected[0] = Section.new "0005", "Spring 2022", "In Person", "Columbus","Dreese Lab",
-                           "357", "Tu Th ", "8:00 am", "8:55 am"
+                           "357", "Tu Th", "8:00 am", "8:55 am"
     expected[1] = Section.new "0010", "Fall 2022", "Online", "Newark","Scott lab",
-                              "420", "M Tu W Th F ", "10:00 am", "12:55 pm"
+                              "420", "M Tu W Th F", "10:00 am", "12:55 pm"
     section_list = Serializer.serialize_sections test_list
 
     expect(expected[0].section_num == section_list[0].section_num.to_s &&
