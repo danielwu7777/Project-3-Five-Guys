@@ -1,12 +1,18 @@
 # File created 6/11/2022 by Noah Moon
 # File edited 6/12/2022 by Noah Moon
 # Edited 6/16/2022 by Yuhao Yan: parentheses removed
+# Edoted 6/19/2022 by Noah Moon
 require 'set'
 
 class Utility
   # Created 6/11/2022 by Noah Moon
   # Edited 6/12/2022 by Noah Moon
-  # Returns a new string which wraps line according to max_line
+=begin
+  Returns a new string which wraps line according to max_line
+  string: String - string to format
+  max_line: Integer - num of chars in each line
+  break_char: Set - set of seperators to end lines (space by default)
+=end
   def self.wrap_string string, max_line, break_chars = Set[" "]
     newString = String.new
 

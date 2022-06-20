@@ -7,10 +7,13 @@
 class Regex_Factory
 
   # Created 6/17/2022 by Noah Moon
+=begin
+     Returns regex to specify sections accoring to filter parameters
+     filter_parameters: Hash - key = attribute, value = desired value
+=end
   def self.convert_section_filter_to_regex filter_parameters
     return if filter_parameters == nil
     regExpString = SECTION_START_REGEX
-    # Counter to know when at the last key-val pair in hash
     filter_parameters.each do |key, value|
       case key
         when "sec_num"
@@ -41,7 +44,10 @@ class Regex_Factory
   # Edited 6/12/2022 by Daniel Wu: using TDD to implement method
   # Edited 6/13/2022 by Daniel Wu: added ability to iterate through hash
   # Edited 6/18/2022 by Noah Moon
-  # filter_parameters: hash containing key-val pairs describing how user wants courses filtered
+=begin
+  Returns regex to specify sections accoring to filter parameters
+  filter_parameters: hash containing key-val pairs describing how user wants courses filtered
+=end
   def self.convert_course_filter_to_regex filter_parameters
     return if filter_parameters == nil
     regExpString = ""
@@ -52,7 +58,7 @@ class Regex_Factory
       when "title"
         regExpString += "<h4 class=[\'|\"]title[\'|\"]>.*?#{value}.*?(?=<span class=[\'|\"]number[\'|\"]>).*?"
       when "descr"
-        regExpString += "class=[\'|\"]label[\'|\"]>Description.*?#{value}.*?(?=Prereq:).*?"
+        regExpString += "(?<=class=['|\"]label['|\"]>Description:<\/span> ).*?#{value}.*?(?=<).*?"
       when "pre"
         regExpString += "Prereq:.*?#{value}.*?<span class=[\'|\"]label[\'|\"]>.*?"
       when "hrs"
