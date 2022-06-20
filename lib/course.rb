@@ -2,6 +2,7 @@
 # File edited 6/10/2022 by Noah Moon
 # File edited 6/11/2022 by Noah Moon
 # Edited 6/16/2022 by Yuhao Yan: parentheses removed
+# File edited 6/19/2022 by Noah Moon
 
 class Course
   attr_reader :course_num, :course_title, :description, :prereqs, :hours
@@ -20,7 +21,8 @@ hours = String - credit hours for course. Ex. hours = "3"
     @course_num , @course_title, @description, @prereqs, @hours = class_num, course_title, description, prereqs, hours
   end
 
-  #Created 6/11/2022 by Noah Moon
+  # Created 6/11/2022 by Noah Moon
+  # return course as well-formed string
   def to_s
     "Course Title: #{@course_title}\nCourse Number: #{@course_num}\nDescription: #{@description}\nPrereqs: #{@prereqs}"\
     "\nHours: #{@hours}"

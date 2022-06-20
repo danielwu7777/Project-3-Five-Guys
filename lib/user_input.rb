@@ -2,6 +2,7 @@
 # File edited 6/11/2022 by Jake McCann
 # Edited 6/16/2022 by Yuhao Yan: parentheses removed
 # Edited 6/18/2022 by Noah Moon
+# Edited 6/19/2022 by Noah Moon
 require_relative 'course_section_factory'
 require_relative 'utility'
 require_relative 'safe_input'
@@ -18,7 +19,7 @@ class User_Input
 
     # Created 6/11/2022 by Jake McCann
     # Edited 6/19/2022 by Noah Moon
-    # Prompts user and gets input
+    # Prompts user and gets input for main menu
     def main_io
         system "clear"
         menu_template{main_menu}
@@ -37,6 +38,7 @@ class User_Input
     # Created 6/11/2022 by Jake McCann
     # Edited 6/13/2022 by Noah Moon
     # Edited 6/19/2022 by Noah Moon
+    # Prompts user and gets input for courses menu
     def courses_io filter_hash
         system "clear"
         @data_factory.courses(filter_hash).each{|course| puts(Utility.wrap_string "\n#{course.to_s}", 90)}
@@ -54,6 +56,7 @@ class User_Input
 
     # Created by Noah Moon 6/18/2022
     # Edited 6/19/2022 by Noah Moon
+    # Prompts user and gets input for course menu
     def section_io filter_hash
         system "clear"
         course_num = nil
@@ -75,9 +78,12 @@ class User_Input
             section_filter_io
         end
     end
-    #Created 6/14/2022 by Jake McCann
+    # Created 6/14/2022 by Jake McCann
     # Edited 6/18/2022 by Noah Moon
-    # course_bool = true if course, false if section
+=begin
+    Prompts user for file name and gets input
+    course_bool = true if course, false if section
+=end
     def file_io course_bool
         system "clear"
         menu_template {file_menu}
@@ -91,6 +97,7 @@ class User_Input
 
     # Created 6/14/2022 by Jake McCann
     # Edited 6/18/2022 by Noah Moon
+    # Prompts user for course filters and gets input for each attribute
     def course_filter_io
         filter_hash = Hash.new
         menu_template {filter_menu}
@@ -100,10 +107,7 @@ class User_Input
         print "Course number filter (4-digit number): "
         input = Safe_Input.safe_input(Regex_Factory::COURSE_NUM_REGEX) {puts COURSE_NUM_ERRMSG}
         filter_hash["num"] = input if input != ""
-        print "Course description filter: "
-        input = Safe_Input.safe_input(Regex_Factory::COURSE_DESC_REGEX) {puts COURSE_DESC_ERRMSG}
-        filter_hash["desc"] = input if input != ""
-        print "Course prereqs filter: (4-digit number)"
+        print "Course prereqs filter(one 4-digit number): "
         input = Safe_Input.safe_input(Regex_Factory::COURSE_PRE_REGEX) {puts COURSE_PREREQ_ERRMSG}
         filter_hash["pre"] = input if input != ""
         print "Course hours filter: "
@@ -114,6 +118,7 @@ class User_Input
     end
 
     # Created 6/18/2022 by Noah Moon
+    # Prompts user for section filters and gets input for each attribute
     def section_filter_io
         system "clear"
         filter_hash = Hash.new
@@ -148,7 +153,9 @@ class User_Input
         section_io filter_hash
 
     end
+
     private
+
     # Created 6/14/2022 by Jake McCann
     # Edited 6/19/2022 by Noah Moon
     def menu_template
